@@ -1,6 +1,16 @@
 /* ================================================
-    CALENDAR.css - Calendar grid, vacantion, range
+    CALENDAR.css - Calendar grid, vacation, range
    ================================================ */
+
+:root {
+  --bg:#f4f1eb; --surface:#fff; --surface2:#f9f7f3; --border:#e2ddd5;
+  --text:#1c1917; --muted:#78716c;
+  --ferie:#1d4ed8; --ferie-light:#dbeafe;
+  --permesso:#b45309; --permesso-light:#fef3c7;
+  --sede:#15803d; --sede-light:#dcfce7;
+  --riporto:#7c3aed; --riporto-light:#ede9fe;
+  --danger:#dc2626; --radius:12px;
+}
 
 /* ── Calendar ── */
 .cal-toolbar {
