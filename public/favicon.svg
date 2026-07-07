@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><style>
+    #light-icon {
+      display: inline;
+    }
+    #dark-icon {
+      display: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #light-icon {
+        display: none;
+      }
+      #dark-icon {
+        display: inline;
+      }
+    }
+  </style><g id="light-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g clip-path="url(#SvgjsClipPath1046)"><rect width="1000" height="1000" fill="#9d5c26"></rect><g transform="matrix(0.68359375,0,0,0.68359375,150,150)"><svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img"><title>Icona app ferie e permessi</title><desc>Calendario bianco con un sole giallo al centro su una piastrella arrotondata in tonalità tramonto arancio-corallo.</desc><defs>
+<linearGradient id="tileWarm" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#FB923C"></stop>
+<stop offset="1" stop-color="#F43F5E"></stop>
+</linearGradient>
+<linearGradient id="sunWarm" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#FEF08A"></stop>
+<stop offset="1" stop-color="#FBBF24"></stop>
+</linearGradient>
+<clipPath id="SvgjsClipPath1046"><rect width="1000" height="1000" x="0" y="0" rx="350" ry="350"></rect></clipPath></defs><rect x="0" y="0" width="1024" height="1024" rx="237" fill="url(#tileWarm)"></rect><rect x="291" y="179" width="45" height="109" rx="22" fill="#9F1239"></rect><rect x="624" y="179" width="45" height="109" rx="22" fill="#9F1239"></rect><rect x="176" y="230" width="608" height="576" rx="64" fill="#FFFFFF"></rect><path d="M176 294 Q176 230 240 230 L720 230 Q784 230 784 294 L784 378 L176 378 Z" fill="#9F1239"></path><g stroke="#F97316" stroke-width="22" stroke-linecap="round">
+<line x1="480" y1="461" x2="480" y2="422"></line>
+<line x1="480" y1="742" x2="480" y2="781"></line>
+<line x1="614" y1="595" x2="653" y2="595"></line>
+<line x1="346" y1="595" x2="307" y2="595"></line>
+<line x1="576" y1="499" x2="605" y2="470"></line>
+<line x1="384" y1="691" x2="355" y2="720"></line>
+<line x1="576" y1="691" x2="605" y2="720"></line>
+<line x1="384" y1="499" x2="355" y2="470"></line>
+</g><circle cx="480" cy="595" r="102" fill="url(#sunWarm)"></circle></svg></g></g></svg></g><g id="dark-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g clip-path="url(#SvgjsClipPath1047)"><rect width="1000" height="1000" fill="#9d5c26"></rect><g transform="matrix(0.68359375,0,0,0.68359375,150,150)"><svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img"><title>Icona app ferie e permessi</title><desc>Calendario bianco con un sole giallo al centro su una piastrella arrotondata in tonalità tramonto arancio-corallo.</desc><defs>
+<linearGradient id="tileWarm" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#FB923C"></stop>
+<stop offset="1" stop-color="#F43F5E"></stop>
+</linearGradient>
+<linearGradient id="sunWarm" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#FEF08A"></stop>
+<stop offset="1" stop-color="#FBBF24"></stop>
+</linearGradient>
+<clipPath id="SvgjsClipPath1047"><rect width="1000" height="1000" x="0" y="0" rx="350" ry="350"></rect></clipPath></defs><rect x="0" y="0" width="1024" height="1024" rx="237" fill="url(#tileWarm)"></rect><rect x="291" y="179" width="45" height="109" rx="22" fill="#9F1239"></rect><rect x="624" y="179" width="45" height="109" rx="22" fill="#9F1239"></rect><rect x="176" y="230" width="608" height="576" rx="64" fill="#FFFFFF"></rect><path d="M176 294 Q176 230 240 230 L720 230 Q784 230 784 294 L784 378 L176 378 Z" fill="#9F1239"></path><g stroke="#F97316" stroke-width="22" stroke-linecap="round">
+<line x1="480" y1="461" x2="480" y2="422"></line>
+<line x1="480" y1="742" x2="480" y2="781"></line>
+<line x1="614" y1="595" x2="653" y2="595"></line>
+<line x1="346" y1="595" x2="307" y2="595"></line>
+<line x1="576" y1="499" x2="605" y2="470"></line>
+<line x1="384" y1="691" x2="355" y2="720"></line>
+<line x1="576" y1="691" x2="605" y2="720"></line>
+<line x1="384" y1="499" x2="355" y2="470"></line>
+</g><circle cx="480" cy="595" r="102" fill="url(#sunWarm)"></circle></svg></g></g></svg></g></svg>
