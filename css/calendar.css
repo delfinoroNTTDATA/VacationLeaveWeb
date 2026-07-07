@@ -1,0 +1,412 @@
+/* ================================================
+    CALENDAR.css - Calendar grid, vacantion, range
+   ================================================ */
+
+/* ── Calendar ── */
+.cal-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cal-nav {
+    display: flex;
+    align-items: center;
+    gap:8px;
+    flex-wrap: wrap;
+}
+
+.cal-nav-btn {
+    width: 36px;
+    height: 36px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .15s;
+    flex-shrink: 0;
+}
+
+.cal-nav-btn:hover {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+}
+
+.dp-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dp-sel{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 9rem;
+    font-weight: 600;
+    cursor: pointer;
+    appearance: none;
+    transition: border-color .15s;
+}
+
+.dp-sel:focus {
+    outline: none;
+    border-color: var(--ferie)
+}
+
+.dp-mese {
+    min-width: 118px
+}
+
+.dp-anno {
+    min-width: 76px
+}
+
+.dp-sep {
+    color: var(--border);
+    font-size: 1.1rem;
+    user-select: none
+}
+
+.dp-oggi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: .82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s;
+    white-space: nowrap
+}
+
+.dp-oggi:hover {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text)
+}
+
+.legend {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: .76rem;
+    color: var(--muted)
+}
+
+.legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 3px
+}
+
+.sel-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 6px;
+    margin-bottom: 12px;
+    flex-wrap: wrap
+}
+
+.sel-bar-label {
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+    padding: 0 8px;
+    white-space: nowrap
+}
+
+.sel-mode-btn {
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    padding: 7px 14px;
+    cursor: pointer;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--muted);
+    transition: all .15s;
+    white-space: nowrap
+}
+
+.sel-mode-btn:hover {
+    color: var(--text);
+    border-color: var(--border)
+}
+
+.sel-mode-btn.active {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text)
+}
+
+.multi-hint {
+    font-size: .76rem;
+    padding: 4px 10px;
+    background: var(--ferie-light);
+    color: var(--ferie);
+    border-radius: 6px;
+    display: none
+}
+
+.multi-hint.show {
+    display: inline-block
+}
+
+.btn-apply-multi {
+    background: var(--ferie);
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 7px 14px;
+    cursor: pointer;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: .82rem;
+    font-weight: 600;
+    transition: all .15s;
+    display: none
+}
+
+.btn-apply-multi.show {
+    display: inline-block
+}
+
+.btn-apply-multi:hover {
+    opacity: .88
+}
+
+.cal-grid {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden
+}
+
+.cal-wdays {
+    display: grid;
+    grid-template-columns:repeat(7, 1fr);
+    background: var(--text)
+}
+
+.cal-wday {
+    padding: 9px 0;
+    text-align: center;
+    font-size: .68rem;
+    font-weight: 600;
+    color: rgba(244, 241, 235, .6);
+    text-transform: uppercase;
+    letter-spacing: .07em
+}
+
+.cal-days {
+    display: grid;
+    grid-template-columns:repeat(7, 1fr)
+}
+
+.cal-day {
+    min-height: 100px;
+    padding: 7px 6px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background .12s;
+    position: relative;
+    user-select: none;
+    overflow: visible
+}
+
+.cal-day:nth-child(7n) {
+    border-right: none
+}
+
+.cal-day:hover:not(.empty) {
+    background: var(--surface2)
+}
+
+.cal-day.empty {
+    background: var(--surface2);
+    cursor: default;
+    opacity: .4
+}
+
+.cal-day.weekend {
+    background: rgba(0, 0, 0, .015)
+}
+
+.cal-day.weekend .dn {
+    color: var(--muted)
+}
+
+.cal-day.today .dn {
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 50%
+}
+
+.cal-day.selected-multi {
+    background: #dbeafe !important;
+    outline: 2px solid var(--ferie);
+    outline-offset: -2px;
+    border-radius: 4px
+}
+
+.dn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    font-size: .81rem;
+    font-weight: 600;
+    margin-bottom: 4px
+}
+
+.day-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 3px
+}
+
+.dtag {
+    font-size: .68rem;
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5;
+    display: block
+}
+
+.dtag-ferie {
+    background: var(--ferie);
+    color: #fff
+}
+
+.dtag-permesso {
+    background: var(--permesso);
+    color: #fff
+}
+
+.dtag-sede {
+    background: var(--sede);
+    color: #fff
+}
+
+/* ── CALENDAR ── vacation and range ── */
+.cal-day.festivo .dn {
+    color: var(--danger);
+    font-weight: 700
+}
+
+.cal-day.festivo {
+    background: rgba(220, 38, 38, .04)
+}
+
+.dtag-festivo {
+    background: #fee2e2;
+    color: var(--danger)
+}
+
+.cal-day.range-start {
+    outline: 3px solid var(--ferie);
+    outline-offset: -2px;
+    border-radius: 6px 0 0 6px
+}
+
+.cal-day.range-end {
+    outline: 3px solid var(--ferie);
+    outline-offset: -2px;
+    border-radius: 0 6px 6px 0
+}
+
+.cal-day.range-mid {
+    background: #dbeafe !important
+}
+
+.cal-day.selected-multi {
+    background: #dbeafe !important;
+    outline: 2px solid var(--ferie);
+    outline-offset: -2px;
+    border-radius: 4px
+}
+
+/* Toggle opzioni cal */
+.cal-opts {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center
+}
+
+.cal-opt-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: .76rem;
+    font-weight: 600;
+    color: var(--muted);
+    transition: all .15s;
+    user-select: none
+}
+
+.cal-opt-toggle input {
+    display: none
+}
+
+.cal-opt-toggle.on {
+    background: var(--ferie-light);
+    border-color: var(--ferie);
+    color: var(--ferie)
+}
+
+.cal-opt-toggle .tog-ico {
+    font-size: .9rem
+}
+
+/* Pill hint range */
+.range-hint {
+    font-size: .76rem;
+    padding: 4px 10px;
+    background: #fef3c7;
+    color: #92400e;
+    border-radius: 6px;
+    display: none
+}
+
+.range-hint.show {
+    display: inline-block
+}
