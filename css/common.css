@@ -8,11 +8,11 @@
 :root{
   --bg:#f4f1eb; --surface:#fff; --surface2:#f9f7f3; --border:#e2ddd5;
   --text:#1c1917; --muted:#78716c;
-  --ferie:#1d4ed8; --ferie-light:#dbeafe;
-  --permesso:#b45309; --permesso-light:#fef3c7;
-  --sede:#15803d; --sede-light:#dcfce7;
-  --riporto:#7c3aed; --riporto-light:#ede9fe;
-  --danger:#dc2626; --radius:12px;
+  --vacation:#1d4ed8; --vacation-light:#dbeafe;
+  --permit:#b45309; --permit-light:#fef3c7;
+  --place:#15803d; --place-light:#dcfce7;
+  --amountCarriedOver:#7c3aed; --amountCarriedOver-light:#ede9fe;
+  --danger:#dc2626; --radius:12px; --accent:#1d4ed8;
 }
 
 * {
@@ -92,7 +92,7 @@ body {
 
 .auth-input:focus {
   outline: none;
-  border-color: var(--ferie)
+  border-color: var(--vacation)
 }
 
 .auth-btn {
@@ -353,22 +353,22 @@ nav {
   color: var(--text)
 }
 
-.type-opt.sel-ferie {
-  border-color: var(--ferie);
-  color: var(--ferie);
-  background: var(--ferie-light)
+.type-opt.sel-vacation {
+  border-color: var(--vacation);
+  color: var(--vacation);
+  background: var(--vacation-light)
 }
 
-.type-opt.sel-permesso {
-  border-color: var(--permesso);
-  color: var(--permesso);
-  background: var(--permesso-light)
+.type-opt.sel-permit {
+  border-color: var(--permit);
+  color: var(--permit);
+  background: var(--permit-light)
 }
 
-.type-opt.sel-sede {
-  border-color: var(--sede);
-  color: var(--sede);
-  background: var(--sede-light)
+.type-opt.sel-place {
+  border-color: var(--place);
+  color: var(--place);
+  background: var(--place-light)
 }
 
 .qty-section {
@@ -415,15 +415,15 @@ nav {
 }
 
 .qty-btn.active {
-  border-color: var(--ferie);
-  color: var(--ferie);
-  background: var(--ferie-light)
+  border-color: var(--vacation);
+  color: var(--vacation);
+  background: var(--vacation-light)
 }
 
 .qty-btn.active-p {
-  border-color: var(--permesso);
-  color: var(--permesso);
-  background: var(--permesso-light)
+  border-color: var(--permit);
+  color: var(--permit);
+  background: var(--permit-light)
 }
 
 .ore-custom-row {
@@ -453,7 +453,7 @@ nav {
 
 .ore-input:focus {
   outline: none;
-  border-color: var(--ferie)
+  border-color: var(--vacation)
 }
 
 .ore-note {
@@ -489,15 +489,15 @@ nav {
 }
 
 .half-btn.active {
-  border-color: var(--ferie);
-  color: var(--ferie);
-  background: var(--ferie-light)
+  border-color: var(--vacation);
+  color: var(--vacation);
+  background: var(--vacation-light)
 }
 
 .half-btn.active-p {
-  border-color: var(--permesso);
-  color: var(--permesso);
-  background: var(--permesso-light)
+  border-color: var(--permit);
+  color: var(--permit);
+  background: var(--permit-light)
 }
 
 .modal-btns {
@@ -639,7 +639,7 @@ nav {
 
 .welcome-input:focus {
   outline: none;
-  border-color: var(--ferie)
+  border-color: var(--vacation)
 }
 
 .welcome-hint {
@@ -649,12 +649,12 @@ nav {
 }
 
 .welcome-note {
-  background: var(--ferie-light);
+  background: var(--vacation-light);
   border: 1px solid #bfdbfe;
   border-radius: 10px;
   padding: 12px 14px;
   font-size: .82rem;
-  color: var(--ferie);
+  color: var(--vacation);
   margin-bottom: 20px;
   line-height: 1.5
 }
@@ -717,7 +717,7 @@ nav {
 }
 
 .welcome-dot.active {
-  background: var(--ferie)
+  background: var(--vacation)
 }
 
 /* ── SYNC INDICATOR ── */

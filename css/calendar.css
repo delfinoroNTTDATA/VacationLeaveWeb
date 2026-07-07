@@ -2,16 +2,15 @@
     CALENDAR.css - Calendar grid, vacation, range
    ================================================ */
 
-:root {
-  --bg:#f4f1eb; --surface:#fff; --surface2:#f9f7f3; --border:#e2ddd5;
-  --text:#1c1917; --muted:#78716c;
-  --ferie:#1d4ed8; --ferie-light:#dbeafe;
-  --permesso:#b45309; --permesso-light:#fef3c7;
-  --sede:#15803d; --sede-light:#dcfce7;
-  --riporto:#7c3aed; --riporto-light:#ede9fe;
-  --danger:#dc2626; --radius:12px;
+:root{
+    --bg:#f4f1eb; --surface:#fff; --surface2:#f9f7f3; --border:#e2ddd5;
+    --text:#1c1917; --muted:#78716c;
+    --vacation:#1d4ed8; --vacation-light:#dbeafe;
+    --permit:#b45309; --permit-light:#fef3c7;
+    --place:#15803d; --place-light:#dcfce7;
+    --amountCarriedOver:#7c3aed; --amountCarriedOver-light:#ede9fe;
+    --danger:#dc2626; --radius:12px; --accent:#1d4ed8;
 }
-
 /* ── Calendar ── */
 .cal-toolbar {
     display: flex;
@@ -72,7 +71,7 @@
 
 .dp-sel:focus {
     outline: none;
-    border-color: var(--ferie)
+    border-color: var(--vacation)
 }
 
 .dp-mese {
@@ -179,8 +178,8 @@
 .multi-hint {
     font-size: .76rem;
     padding: 4px 10px;
-    background: var(--ferie-light);
-    color: var(--ferie);
+    background: var(--vacation-light);
+    color: var(--vacation);
     border-radius: 6px;
     display: none
 }
@@ -190,7 +189,7 @@
 }
 
 .btn-apply-multi {
-    background: var(--ferie);
+    background: var(--vacation);
     color: #fff;
     border: none;
     border-radius: 7px;
