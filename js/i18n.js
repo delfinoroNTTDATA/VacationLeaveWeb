@@ -45,4 +45,31 @@ export const I18N = {
         months_short:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
         weekdays:['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
     }
+};
+
+export let LANG = localStorage.getItem('leave_lang') || 'it';
+
+export function t(key) {
+    return ( I18N[LANG] && I18N[LANG][key]) || ( I18N.it[key] ) || key;
 }
+
+export function applyI28n(){
+    document.querySelectorAll('[data-i18n]').forEach( el => {
+        const val = t(el.dataset.i18n);
+        if (val) el.textContent = val;
+    });
+    const lb = document.getElementById('langBtn');
+    if (lb) lb.textContent = LANG === 'it' ? '🇮🇹 IT' : '🇬🇧 EN';
+    document.querySelectorAll('cal_wday').forEach( (el , i ) => {
+        if (I18N[LANG].weekdays[i]) el.textContent = I18N[LANG].weekdays[i];
+    });
+}
+
+export function toggleLang(){
+    LANG = LANG === 'it' ? 'en' : 'it';
+    localStorage.setItem('leave_lang', LANG);
+    applyI28n()
+    document.dispatchEvent(new CustomEvent('langchange'));
+}
+
+window.toggleLang = toggleLang;
