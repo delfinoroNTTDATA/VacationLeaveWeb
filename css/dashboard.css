@@ -1,0 +1,175 @@
+/* ==================================================
+    DASHBOARD.CSS - Statistics card and recent events
+    =================================================
+*/
+
+:root{
+  --bg:#f4f1eb; --surface:#fff; --surface2:#f9f7f3; --border:#e2ddd5;
+  --text:#1c1917; --muted:#78716c;
+  --ferie:#1d4ed8; --ferie-light:#dbeafe;
+  --permesso:#b45309; --permesso-light:#fef3c7;
+  --sede:#15803d; --sede-light:#dcfce7;
+  --riporto:#7c3aed; --riporto-light:#ede9fe;
+  --danger:#dc2626; --radius:12px;
+}
+
+/* ── STATS ── */
+.stats {
+    display: grid;
+    grid-template-columns:repeat(auto-fit, minmax(185px, 1fr));
+    gap: 14px;
+    margin-bottom: 28px
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow .2s, transform .2s
+}
+
+.card:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .08);
+    transform: translateY(-2px)
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent, var(--ferie))
+}
+
+.card-label {
+    font-size: .68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--muted);
+    margin-bottom: 7px
+}
+
+.card-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--accent, var(--ferie))
+}
+
+.card-sub {
+    font-size: .76rem;
+    color: var(--muted);
+    margin-top: 5px
+}
+
+.card-riporto {
+    font-size: .72rem;
+    color: var(--riporto);
+    margin-top: 4px;
+    font-weight: 600
+}
+
+.bar {
+    background: var(--border);
+    border-radius: 99px;
+    height: 5px;
+    margin-top: 10px;
+    overflow: hidden
+}
+
+.bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: var(--accent, var(--ferie));
+    transition: width .4s ease
+}
+
+.card-riporto-banner {
+    background: var(--riporto-light);
+    border: 1px solid #c4b5fd;
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px
+}
+
+.crb-icon {
+    font-size: 1.6rem
+}
+
+.crb-text {
+    flex: 1
+}
+
+.crb-title {
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--riporto);
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    margin-bottom: 3px
+}
+
+.crb-detail {
+    font-size: .84rem;
+    color: #5b21b6
+}
+
+/* ── RECENT ── */
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    margin-bottom: 14px
+}
+
+.recent-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden
+}
+
+.recent-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border);
+    font-size: .87rem
+}
+
+.recent-row:last-child {
+    border-bottom: none
+}
+
+.badge {
+    font-size: .68rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 99px;
+    letter-spacing: .04em;
+    white-space: nowrap
+}
+
+.badge-ferie {
+    background: var(--ferie-light);
+    color: var(--ferie)
+}
+
+.badge-permesso {
+    background: var(--permesso-light);
+    color: var(--permesso)
+}
+
+.badge-sede {
+    background: var(--sede-light);
+    color: var(--sede)
+}
