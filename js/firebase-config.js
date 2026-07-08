@@ -29,7 +29,7 @@ export const session = { uid: null };
 // ── Firestore References ──
 export const evRef  = () => collection(db, 'users', session.uid, 'events');
 export const cfgRef = () => doc(db,        'users', session.uid, 'config', 'main');
-export const ripRef = () => collection(db, 'users', session.uid, 'riporti');
+export const amountCORef = () => collection(db, 'users', session.uid, 'riporti');
 
 // ── Translation of error messages ──
 export function tradErr(code) {
