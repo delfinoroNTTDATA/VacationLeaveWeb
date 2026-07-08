@@ -6,9 +6,9 @@
 :root{
     --bg:#f4f1eb; --surface:#fff; --surface2:#f9f7f3; --border:#e2ddd5;
     --text:#1c1917; --muted:#78716c;
-    --vacation:#1d4ed8; --vacation-light:#dbeafe;
+    --leave:#1d4ed8; --leave-light:#dbeafe;
     --permit:#b45309; --permit-light:#fef3c7;
-    --place:#15803d; --place-light:#dcfce7;
+    --office:#15803d; --office-light:#dcfce7;
     --amountCarriedOver:#7c3aed; --amountCarriedOver-light:#ede9fe;
     --danger:#dc2626; --radius:12px; --accent:#1d4ed8;
 }
@@ -77,13 +77,13 @@
 }
 
 .btn-csv {
-    background: var(--place-light);
-    color: var(--place);
-    border: 1px solid var(--place)
+    background: var(--office-light);
+    color: var(--office);
+    border: 1px solid var(--office)
 }
 
 .btn-csv:hover {
-    background: var(--place);
+    background: var(--office);
     color: #fff
 }
 
@@ -204,8 +204,8 @@
 }
 
 .mese-chip.active {
-    background: var(--vacation);
-    border-color: var(--vacation);
+    background: var(--leave);
+    border-color: var(--leave);
     color: #fff
 }
 
@@ -263,9 +263,9 @@
     border-radius: 99px
 }
 
-.rpt-badge-vacation {
-    background: var(--vacation-light);
-    color: var(--vacation)
+.rpt-badge-leave {
+    background: var(--leave-light);
+    color: var(--leave)
 }
 
 .rpt-badge-permit {
@@ -273,9 +273,9 @@
     color: var(--permit)
 }
 
-.rpt-badge-place {
-    background: var(--place-light);
-    color: var(--place)
+.rpt-badge-office {
+    background: var(--office-light);
+    color: var(--office)
 }
 
 .rpt-giorni {
@@ -323,9 +323,9 @@
     border-radius: 99px
 }
 
-.rpt-chip-vacation {
-    background: var(--vacation-light);
-    color: var(--vacation)
+.rpt-chip-leave {
+    background: var(--leave-light);
+    color: var(--leave)
 }
 
 .rpt-chip-permit {
@@ -333,9 +333,9 @@
     color: var(--permit)
 }
 
-.rpt-chip-place {
-    background: var(--place-light);
-    color: var(--place)
+.rpt-chip-office {
+    background: var(--office-light);
+    color: var(--office)
 }
 
 .rpt-empty {

@@ -6,9 +6,9 @@
 :root{
     --bg:#f4f1eb; --surface:#fff; --surface2:#f9f7f3; --border:#e2ddd5;
     --text:#1c1917; --muted:#78716c;
-    --vacation:#1d4ed8; --vacation-light:#dbeafe;
+    --leave:#1d4ed8; --leave-light:#dbeafe;
     --permit:#b45309; --permit-light:#fef3c7;
-    --place:#15803d; --place-light:#dcfce7;
+    --office:#15803d; --office-light:#dcfce7;
     --amountCarriedOver:#7c3aed; --amountCarriedOver-light:#ede9fe;
     --danger:#dc2626; --radius:12px; --accent:#1d4ed8;
 }

@@ -8,9 +8,9 @@
 :root{
   --bg:#f4f1eb; --surface:#fff; --surface2:#f9f7f3; --border:#e2ddd5;
   --text:#1c1917; --muted:#78716c;
-  --vacation:#1d4ed8; --vacation-light:#dbeafe;
+  --leave:#1d4ed8; --leave-light:#dbeafe;
   --permit:#b45309; --permit-light:#fef3c7;
-  --place:#15803d; --place-light:#dcfce7;
+  --office:#15803d; --office-light:#dcfce7;
   --amountCarriedOver:#7c3aed; --amountCarriedOver-light:#ede9fe;
   --danger:#dc2626; --radius:12px; --accent:#1d4ed8;
 }
@@ -92,7 +92,7 @@ body {
 
 .auth-input:focus {
   outline: none;
-  border-color: var(--vacation)
+  border-color: var(--leave)
 }
 
 .auth-btn {
@@ -353,10 +353,10 @@ nav {
   color: var(--text)
 }
 
-.type-opt.sel-vacation {
-  border-color: var(--vacation);
-  color: var(--vacation);
-  background: var(--vacation-light)
+.type-opt.sel-leave {
+  border-color: var(--leave);
+  color: var(--leave);
+  background: var(--leave-light)
 }
 
 .type-opt.sel-permit {
@@ -365,10 +365,10 @@ nav {
   background: var(--permit-light)
 }
 
-.type-opt.sel-place {
-  border-color: var(--place);
-  color: var(--place);
-  background: var(--place-light)
+.type-opt.sel-office {
+  border-color: var(--office);
+  color: var(--office);
+  background: var(--office-light)
 }
 
 .qty-section {
@@ -415,9 +415,9 @@ nav {
 }
 
 .qty-btn.active {
-  border-color: var(--vacation);
-  color: var(--vacation);
-  background: var(--vacation-light)
+  border-color: var(--leave);
+  color: var(--leave);
+  background: var(--leave-light)
 }
 
 .qty-btn.active-p {
@@ -453,7 +453,7 @@ nav {
 
 .ore-input:focus {
   outline: none;
-  border-color: var(--vacation)
+  border-color: var(--leave)
 }
 
 .ore-note {
@@ -489,9 +489,9 @@ nav {
 }
 
 .half-btn.active {
-  border-color: var(--vacation);
-  color: var(--vacation);
-  background: var(--vacation-light)
+  border-color: var(--leave);
+  color: var(--leave);
+  background: var(--leave-light)
 }
 
 .half-btn.active-p {
@@ -639,7 +639,7 @@ nav {
 
 .welcome-input:focus {
   outline: none;
-  border-color: var(--vacation)
+  border-color: var(--leave)
 }
 
 .welcome-hint {
@@ -649,12 +649,12 @@ nav {
 }
 
 .welcome-note {
-  background: var(--vacation-light);
+  background: var(--leave-light);
   border: 1px solid #bfdbfe;
   border-radius: 10px;
   padding: 12px 14px;
   font-size: .82rem;
-  color: var(--vacation);
+  color: var(--leave);
   margin-bottom: 20px;
   line-height: 1.5
 }
@@ -717,7 +717,7 @@ nav {
 }
 
 .welcome-dot.active {
-  background: var(--vacation)
+  background: var(--leave)
 }
 
 /* ── SYNC INDICATOR ── */

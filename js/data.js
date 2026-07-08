@@ -32,8 +32,8 @@ export async function loadAmountCarriedOver(){
         S.amountCOManual = {};
         snap.forEach( d => { S.amountCOManual[d.id] = d.data(); });
         if (!S.amountCOManual['2025']) {
-            S.amountCOManual['2026'] = { vacationHours: 29, permHours: 42 };
-            await setDoc( doc( amountCORef(), '2026'), { vacationHours: 29, permHours: 42 });
+            S.amountCOManual['2026'] = { leaveHours: 29, permHours: 42 };
+            await setDoc( doc( amountCORef(), '2026'), { leaveHours: 29, permHours: 42 });
         }
     } catch (e) { console.warn('loadAmountCarried error', e); }
 }

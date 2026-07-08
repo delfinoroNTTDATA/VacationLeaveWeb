@@ -1,13 +1,13 @@
 /* ================================================
-    CALENDAR.css - Calendar grid, vacation, range
+    CALENDAR.css - Calendar grid, leave, range
    ================================================ */
 
 :root{
     --bg:#f4f1eb; --surface:#fff; --surface2:#f9f7f3; --border:#e2ddd5;
     --text:#1c1917; --muted:#78716c;
-    --vacation:#1d4ed8; --vacation-light:#dbeafe;
+    --leave:#1d4ed8; --leave-light:#dbeafe;
     --permit:#b45309; --permit-light:#fef3c7;
-    --place:#15803d; --place-light:#dcfce7;
+    --office:#15803d; --office-light:#dcfce7;
     --amountCarriedOver:#7c3aed; --amountCarriedOver-light:#ede9fe;
     --danger:#dc2626; --radius:12px; --accent:#1d4ed8;
 }
@@ -71,7 +71,7 @@
 
 .dp-sel:focus {
     outline: none;
-    border-color: var(--vacation)
+    border-color: var(--leave)
 }
 
 .dp-mese {
@@ -178,8 +178,8 @@
 .multi-hint {
     font-size: .76rem;
     padding: 4px 10px;
-    background: var(--vacation-light);
-    color: var(--vacation);
+    background: var(--leave-light);
+    color: var(--leave);
     border-radius: 6px;
     display: none
 }
@@ -189,7 +189,7 @@
 }
 
 .btn-apply-multi {
-    background: var(--vacation);
+    background: var(--leave);
     color: #fff;
     border: none;
     border-radius: 7px;
@@ -329,7 +329,7 @@
     color: #fff
 }
 
-/* ── CALENDAR ── vacation and range ── */
+/* ── CALENDAR ── leave and range ── */
 .cal-day.festivo .dn {
     color: var(--danger);
     font-weight: 700
