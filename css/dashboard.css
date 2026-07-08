@@ -4,15 +4,14 @@
 */
 
 :root{
-  --bg:#f4f1eb; --surface:#fff; --surface2:#f9f7f3; --border:#e2ddd5;
-  --text:#1c1917; --muted:#78716c;
-  --ferie:#1d4ed8; --ferie-light:#dbeafe;
-  --permesso:#b45309; --permesso-light:#fef3c7;
-  --sede:#15803d; --sede-light:#dcfce7;
-  --riporto:#7c3aed; --riporto-light:#ede9fe;
-  --danger:#dc2626; --radius:12px;
+    --bg:#f4f1eb; --surface:#fff; --surface2:#f9f7f3; --border:#e2ddd5;
+    --text:#1c1917; --muted:#78716c;
+    --vacation:#1d4ed8; --vacation-light:#dbeafe;
+    --permit:#b45309; --permit-light:#fef3c7;
+    --place:#15803d; --place-light:#dcfce7;
+    --amountCarriedOver:#7c3aed; --amountCarriedOver-light:#ede9fe;
+    --danger:#dc2626; --radius:12px; --accent:#1d4ed8;
 }
-
 /* ── STATS ── */
 .stats {
     display: grid;
@@ -43,7 +42,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: var(--accent, var(--ferie))
+    background: var(--accent, var(--vacation))
 }
 
 .card-label {
@@ -59,7 +58,7 @@
     font-family: 'Playfair Display', serif;
     font-size: 2.4rem;
     line-height: 1;
-    color: var(--accent, var(--ferie))
+    color: var(--accent, var(--vacation))
 }
 
 .card-sub {
@@ -68,9 +67,9 @@
     margin-top: 5px
 }
 
-.card-riporto {
+.card-amountCarriedOver {
     font-size: .72rem;
-    color: var(--riporto);
+    color: var(--amountCarriedOver);
     margin-top: 4px;
     font-weight: 600
 }
@@ -86,12 +85,12 @@
 .bar-fill {
     height: 100%;
     border-radius: 99px;
-    background: var(--accent, var(--ferie));
+    background: var(--accent, var(--vacation));
     transition: width .4s ease
 }
 
-.card-riporto-banner {
-    background: var(--riporto-light);
+.card-amountCarriedOver-banner {
+    background: var(--amountCarriedOver-light);
     border: 1px solid #c4b5fd;
     border-radius: var(--radius);
     padding: 16px 20px;
@@ -112,7 +111,7 @@
 .crb-title {
     font-size: .78rem;
     font-weight: 700;
-    color: var(--riporto);
+    color: var(--amountCarriedOver);
     text-transform: uppercase;
     letter-spacing: .07em;
     margin-bottom: 3px
@@ -159,17 +158,17 @@
     white-space: nowrap
 }
 
-.badge-ferie {
-    background: var(--ferie-light);
-    color: var(--ferie)
+.badge-vacation {
+    background: var(--vacation-light);
+    color: var(--vacation)
 }
 
-.badge-permesso {
-    background: var(--permesso-light);
-    color: var(--permesso)
+.badge-permit {
+    background: var(--permit-light);
+    color: var(--permit)
 }
 
-.badge-sede {
-    background: var(--sede-light);
-    color: var(--sede)
+.badge-place {
+    background: var(--place-light);
+    color: var(--place)
 }

@@ -4,13 +4,13 @@
 */
 
 :root{
-  --bg:#f4f1eb; --surface:#fff; --surface2:#f9f7f3; --border:#e2ddd5;
-  --text:#1c1917; --muted:#78716c;
-  --ferie:#1d4ed8; --ferie-light:#dbeafe;
-  --permesso:#b45309; --permesso-light:#fef3c7;
-  --sede:#15803d; --sede-light:#dcfce7;
-  --riporto:#7c3aed; --riporto-light:#ede9fe;
-  --danger:#dc2626; --radius:12px;
+    --bg:#f4f1eb; --surface:#fff; --surface2:#f9f7f3; --border:#e2ddd5;
+    --text:#1c1917; --muted:#78716c;
+    --vacation:#1d4ed8; --vacation-light:#dbeafe;
+    --permit:#b45309; --permit-light:#fef3c7;
+    --place:#15803d; --place-light:#dcfce7;
+    --amountCarriedOver:#7c3aed; --amountCarriedOver-light:#ede9fe;
+    --danger:#dc2626; --radius:12px; --accent:#1d4ed8;
 }
 
 /* ── REPORT ── */
@@ -77,13 +77,13 @@
 }
 
 .btn-csv {
-    background: var(--sede-light);
-    color: var(--sede);
-    border: 1px solid var(--sede)
+    background: var(--place-light);
+    color: var(--place);
+    border: 1px solid var(--place)
 }
 
 .btn-csv:hover {
-    background: var(--sede);
+    background: var(--place);
     color: #fff
 }
 
@@ -112,36 +112,36 @@
     margin-bottom: 13px
 }
 
-.report-riporto-box {
-    background: var(--riporto-light);
+.report-amountCarriedOver-box {
+    background: var(--amountCarriedOver-light);
     border: 1px solid #c4b5fd;
     border-radius: 10px;
     padding: 14px 18px;
     margin-bottom: 14px
 }
 
-.report-riporto-box .rrb-title {
+.report-amountCarriedOver-box .rrb-title {
     font-size: .7rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .08em;
-    color: var(--riporto);
+    color: var(--amountCarriedOver);
     margin-bottom: 8px
 }
 
-.report-riporto-box .rrb-row {
+.report-amountCarriedOver-box .rrb-row {
     display: flex;
     gap: 28px;
     flex-wrap: wrap
 }
 
-.report-riporto-box .rrb-item .rv {
+.report-amountCarriedOver-box .rrb-item .rv {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
-    color: var(--riporto)
+    color: var(--amountCarriedOver)
 }
 
-.report-riporto-box .rrb-item .rl {
+.report-amountCarriedOver-box .rrb-item .rl {
     font-size: .72rem;
     color: #6d28d9;
     margin-top: 1px
@@ -204,8 +204,8 @@
 }
 
 .mese-chip.active {
-    background: var(--ferie);
-    border-color: var(--ferie);
+    background: var(--vacation);
+    border-color: var(--vacation);
     color: #fff
 }
 
@@ -263,19 +263,19 @@
     border-radius: 99px
 }
 
-.rpt-badge-ferie {
-    background: var(--ferie-light);
-    color: var(--ferie)
+.rpt-badge-vacation {
+    background: var(--vacation-light);
+    color: var(--vacation)
 }
 
-.rpt-badge-permesso {
-    background: var(--permesso-light);
-    color: var(--permesso)
+.rpt-badge-permit {
+    background: var(--permit-light);
+    color: var(--permit)
 }
 
-.rpt-badge-sede {
-    background: var(--sede-light);
-    color: var(--sede)
+.rpt-badge-place {
+    background: var(--place-light);
+    color: var(--place)
 }
 
 .rpt-giorni {
@@ -323,19 +323,19 @@
     border-radius: 99px
 }
 
-.rpt-chip-ferie {
-    background: var(--ferie-light);
-    color: var(--ferie)
+.rpt-chip-vacation {
+    background: var(--vacation-light);
+    color: var(--vacation)
 }
 
-.rpt-chip-permesso {
-    background: var(--permesso-light);
-    color: var(--permesso)
+.rpt-chip-permit {
+    background: var(--permit-light);
+    color: var(--permit)
 }
 
-.rpt-chip-sede {
-    background: var(--sede-light);
-    color: var(--sede)
+.rpt-chip-place {
+    background: var(--place-light);
+    color: var(--place)
 }
 
 .rpt-empty {

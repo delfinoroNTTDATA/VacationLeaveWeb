@@ -1,0 +1,214 @@
+/* ====================================================
+   SETTINGS.CSS - Configuration and amount carried over
+   ====================================================
+*/
+
+:root{
+    --bg:#f4f1eb; --surface:#fff; --surface2:#f9f7f3; --border:#e2ddd5;
+    --text:#1c1917; --muted:#78716c;
+    --vacation:#1d4ed8; --vacation-light:#dbeafe;
+    --permit:#b45309; --permit-light:#fef3c7;
+    --place:#15803d; --place-light:#dcfce7;
+    --amountCarriedOver:#7c3aed; --amountCarriedOver-light:#ede9fe;
+    --danger:#dc2626; --radius:12px; --accent:#1d4ed8;
+}
+
+/* ── SETTINGS ── */
+.set-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px
+}
+
+.set-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    margin-bottom: 16px
+}
+
+.set-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border)
+}
+
+.set-row:last-child {
+    border-bottom: none
+}
+
+.set-lbl {
+    font-size: .9rem;
+    font-weight: 500
+}
+
+.set-sub {
+    font-size: .74rem;
+    color: var(--muted);
+    margin-top: 2px
+}
+
+.num-ctrl {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.num-btn {
+    width: 32px;
+    height: 32px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .15s
+}
+
+.num-btn:hover {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text)
+}
+
+.num-v {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    min-width: 40px;
+    text-align: center
+}
+
+.toggle-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.toggle {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    cursor: pointer
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0
+}
+
+.toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: #d6d3d1;
+    border-radius: 99px;
+    transition: .25s
+}
+
+.toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 3px;
+    top: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: .25s
+}
+
+.toggle input:checked + .toggle-slider {
+    background: var(--amountCarriedOver)
+}
+
+.toggle input:checked + .toggle-slider::before {
+    transform: translateX(20px)
+}
+
+.toggle-label {
+    font-size: .84rem;
+    font-weight: 500
+}
+
+.amountCarriedOver-cfg {
+    background: var(--amountCarriedOver-light);
+    border: 1px solid #c4b5fd;
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 12px;
+    display: none
+}
+
+.amountCarriedOver-cfg.show {
+    display: block
+}
+
+.amountCarriedOver-cfg-title {
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--amountCarriedOver);
+    margin-bottom: 12px
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .85rem;
+    margin-top: 8px
+}
+
+.history-table th {
+    text-align: left;
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--muted);
+    padding: 6px 10px;
+    border-bottom: 2px solid var(--border)
+}
+
+.history-table td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle
+}
+
+.history-table tr:last-child td {
+    border-bottom: none
+}
+
+.history-table tr:hover td {
+    background: var(--surface2)
+}
+
+.ht-amountCarriedOver {
+    color: var(--amountCarriedOver);
+    font-weight: 700;
+    font-size: .78rem
+}
+
+.ht-zero {
+    color: var(--muted)
+}
+
+.empty-msg {
+    text-align: center;
+    padding: 44px 0;
+    color: var(--muted);
+    font-size: .9rem
+}
+
+.empty-msg span {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 10px
+}
