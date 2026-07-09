@@ -22,7 +22,7 @@ export const I18N = {
         set_day_hours:'Ore lavorative per giornata', set_year:'Anno di riferimento', set_country:'Paese festività',
         months:['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],
         months_short:['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'],
-        weekdays:['Lun','Mar','Mer','Gio','Ven','Sab','Dom']
+        weekdays:['Lun','Mar','Mer','Gio','Ven','Sab','Dom'], syncBadge: '🔄 Sincronizzato', name: 'Ferie & Permesso'
     },
     en: {
         nav_dashboard:'Dashboard', nav_calendar:'Calendar', nav_report:'Report', nav_settings:'Settings',
@@ -43,7 +43,7 @@ export const I18N = {
         set_day_hours:'Working hours per day', set_year:'Reference year', set_country:'Holidays country',
         months:['January','February','March','April','May','June','July','August','September','October','November','December'],
         months_short:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-        weekdays:['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+        weekdays:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], syncBadge: '🔄 Synchronised', name: 'Leave & Permit'
     }
 };
 
