@@ -46,7 +46,7 @@ export function startEventsListener(onUpdate) {
             const data = d.data();
             if (!data.type) return;
             nuovoEv[d.id] = {
-                type: data.type || 'ferie', qty: data.qty || 'intero',
+                type: data.type || 'leave', qty: data.qty || 'intero',
                 half: data.half || 'mattina', hours: Number(data.hours) || 8
             };
         });

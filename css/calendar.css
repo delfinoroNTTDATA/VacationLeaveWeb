@@ -280,7 +280,7 @@
 
 .cal-day.selected-multi {
     background: #dbeafe !important;
-    outline: 2px solid var(--ferie);
+    outline: 2px solid var(--leave);
     outline-offset: -2px;
     border-radius: 4px
 }
@@ -314,18 +314,18 @@
     display: block
 }
 
-.dtag-ferie {
-    background: var(--ferie);
+.dtag-leave {
+    background: var(--leave);
     color: #fff
 }
 
-.dtag-permesso {
-    background: var(--permesso);
+.dtag-permit {
+    background: var(--permit);
     color: #fff
 }
 
-.dtag-sede {
-    background: var(--sede);
+.dtag-office {
+    background: var(--office);
     color: #fff
 }
 
@@ -345,13 +345,13 @@
 }
 
 .cal-day.range-start {
-    outline: 3px solid var(--ferie);
+    outline: 3px solid var(--leave);
     outline-offset: -2px;
     border-radius: 6px 0 0 6px
 }
 
 .cal-day.range-end {
-    outline: 3px solid var(--ferie);
+    outline: 3px solid var(--leave);
     outline-offset: -2px;
     border-radius: 0 6px 6px 0
 }
@@ -362,7 +362,7 @@
 
 .cal-day.selected-multi {
     background: #dbeafe !important;
-    outline: 2px solid var(--ferie);
+    outline: 2px solid var(--leave);
     outline-offset: -2px;
     border-radius: 4px
 }
@@ -397,9 +397,9 @@
 }
 
 .cal-opt-toggle.on {
-    background: var(--ferie-light);
-    border-color: var(--ferie);
-    color: var(--ferie)
+    background: var(--leave-light);
+    border-color: var(--leave);
+    color: var(--leave)
 }
 
 .cal-opt-toggle .tog-ico {
