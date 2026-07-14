@@ -7,6 +7,7 @@ import { auth, session } from './firebase-config.js';
 import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import { loadConfig, loadAmountCarriedOver, startEventsListener } from "./data";
 import { applyI28n } from "./i18n";
+import {LOCALES, getLocal} from "./locales";
 
 export function renderHeader(activePage) {
     const header = document.createElement("header");
@@ -18,7 +19,9 @@ export function renderHeader(activePage) {
             <a class="nav-btn ${activePage === 'report' ? 'active' : '' }" href="report.html" data-i18n = "nav_report">Report</a>
             <a class="nav-btn ${activePage === 'settings' ? 'active' : '' }" href="settings.html" data-i18n = "nav_settings">Impostazioni</a>
             <div style="width: 1px; height: 20px; background: rgba(255,255,255,15); margin: 0 6px"></div>
-            <button class="lang-btn" id="langBtn" onclick="toggleLang()" title="Change lenguage">🇮🇹 IT</button>
+            <select class="lang-select" id="localSelect" onchange="changeLocal(this.value)" title="Language and holiday">
+                ${Object.entries(LOCALES).map(([code, l]) => `<option value="${code}">${l.flag} ${l.label}</option>`).join('')}
+            </select>
             <div class="user-chip">
                 <div class="user-avatar" id="userAvatar">U</div>
                 <span id="userEmail" style="max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap"></span>
@@ -30,6 +33,8 @@ export function renderHeader(activePage) {
     document.body.insertBefore(header, document.body.firstChild);
 
     document.getElementById('btnLogout').onclick = async () => { await signOut(auth); };
+    const ls = document.getElementById("localSelect");
+    if (ls) ls.value = getLocal();
 }
 
 export async function guardPage(activePage, onReady) {

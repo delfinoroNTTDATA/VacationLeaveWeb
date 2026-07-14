@@ -21,5 +21,6 @@ export const CAL = {
     inclWE: false,
     exclFest: true,
     paese: 'IT',
-    rangeStart: null
+    rangeStart: null,
+    extraCountries: []
 }
