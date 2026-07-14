@@ -198,6 +198,26 @@ nav {
   background: var(--bg)
 }
 
+.lang-select {
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .15);
+  color: rgba(244, 241, 235, .9);
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  margin-right: 6px;
+  max-width: 190px;
+  appearance: none
+}
+
+.lang-select option {
+  background: #1c1917;
+  color: #f4f1eb
+}
+
 .lang-btn {
   background: rgba(255, 255, 255, .08);
   border: 1px solid rgba(255, 255, 255, .15);
