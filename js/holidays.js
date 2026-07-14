@@ -120,6 +120,12 @@ export function holidaysForYear(year) { return keysFor(year, currentCountry()); 
 export function isHoliday(ds) { const [y] = ds.split('-'); return holidaysForYear(parseInt(y)).has(ds)}
 
 export function holidayName(ds) {
+    const [y]=ds.split('-');
+    const key = holidaysForYear(parseInt(y)).get(ds);
+    return key ? labelForKey(key, currentLang()) : null;
+}
+
+export function extraHolidayFor(ds) {
     const [y] = ds.split('-');
     const out = [];
     (CAL.extraCountries || []).forEach(country => {
