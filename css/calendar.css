@@ -65,11 +65,11 @@
     border-color: var(--leave)
 }
 
-.dp-mese {
+.dp-month {
     min-width: 118px
 }
 
-.dp-anno {
+.dp-year {
     min-width: 76px
 }
 
@@ -79,7 +79,7 @@
     user-select: none
 }
 
-.dp-oggi {
+.dp-today {
     background: var(--surface);
     border: 1px solid var(--border);
     color: var(--muted);
@@ -93,7 +93,7 @@
     white-space: nowrap
 }
 
-.dp-oggi:hover {
+.dp-today:hover {
     background: var(--text);
     color: var(--bg);
     border-color: var(--text)
@@ -321,16 +321,16 @@
 }
 
 /* ── CALENDAR ── leave and range ── */
-.cal-day.festivo .dn {
+.cal-day.holiday .dn {
     color: var(--danger);
     font-weight: 700
 }
 
-.cal-day.festivo {
+.cal-day.holiday {
     background: rgba(220, 38, 38, .04)
 }
 
-.dtag-festivo {
+.dtag-holiday {
     background: #fee2e2;
     color: var(--danger)
 }
@@ -409,4 +409,52 @@
 
 .range-hint.show {
     display: inline-block
+}
+
+.extra-countries {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 12px
+}
+
+.extra-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap
+}
+
+.extra-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #f3e8ff;
+    color: #7c3aed;
+    border: 1px solid #d8b4fe;
+    border-radius: 99px;
+    padding: 3px 6px 3px 10px;
+    font-size: .74rem;
+    font-weight: 600
+}
+
+.extra-chip-x {
+    background: none;
+    border: none;
+    color: #7c3aed;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0 2px;
+    border-radius: 50%
+}
+
+.extra-chip-x:hover {
+    background: #e9d5ff
+}
+
+/* Tag festività extra sul calendario */
+.dtag-extra {
+    background: #f3e8ff;
+    color: #7c3aed
 }
