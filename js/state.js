@@ -19,7 +19,7 @@ export const S = {
 // State calendar option
 export const CAL = {
     inclWE: false,
-    exclFest: true,
+    exclLeave: true,
     paese: 'IT',
     rangeStart: null,
     extraCountries: []

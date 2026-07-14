@@ -71,3 +71,9 @@ export const HOLIDAY_NAMES = {
     pt_republic:     { it:'Giorno della Repubblica (PT)', en:'Republic Day (PT)', de:'Tag der Republik (PT)', fr:'Jour de la République (PT)', es:'Día de la República (PT)', nl:'Dag van de Republiek (PT)', pt:'Implantação da República' },
     pt_restoration:  { it:'Restaurazione dell\'Indipendenza', en:'Restoration of Independence', de:'Wiederherstellung der Unabhängigkeit', fr:'Restauration de l\'Indépendance', es:'Restauración de la Independencia', nl:'Herstel van de Onafhankelijkheid', pt:'Restauração da Independência' },
 }
+
+export function labelForKey(key, lang){
+    const e = HOLIDAY_NAMES[key];
+    if (!e) return key;
+    return e[lang] || e.it || key;
+}
