@@ -148,7 +148,7 @@ export function isExcluded(ds) {
     return false;
 }
 
-export function rangeGiorn( start, end) {
+export function rangeDays(start, end) {
     const days= [];
 
     const [sy, sm, sd] = start.split('-').map(Number);
