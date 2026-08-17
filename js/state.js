@@ -12,8 +12,8 @@ export const S = {
     ev: {},
     amountCOManual: {"2026": { leaveHours: 29, permHours: 42 } },
     vm: { y: 2026, m: new Date().getMonth() },
-    sel: { dates: [], tipo: null, qty: 'intero', half: 'mattina', hours: 1 },
-    mode: 'singolo'
+    sel: { dates: [], tipo: null, qty: 'whole', half: 'morning', hours: 1 },
+    mode: 'single'
 }
 
 // State calendar option

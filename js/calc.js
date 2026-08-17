@@ -7,7 +7,7 @@ import {S} from './state';
 export function eventHours(ev){
     if (!ev) return 0;
     if (ev.type === 'office') return S.cfg.dayHours;
-    if (ev.qty === 'intero') return S.cfg.dayHours;
+    if (ev.qty === 'whole') return S.cfg.dayHours;
     if (ev.qty === 'half') return S.cfg.dayHours / 2;
     if (ev.qty === 'ore') return S.cfg.dayHours;
     return S.cfg.dayHours;
@@ -23,7 +23,7 @@ export function rawStats(year) {
         if (!k.startsWith(yStr)) return;
         const o = eventHours(ev);
         if (ev.type === 'leave' ) leaveHours+=o;
-        else if(ev.type === 'permi' ) permitHours+=o;
+        else if(ev.type === 'permit' ) permitHours+=o;
         else if(ev.type === 'office' ) office+=o;
     });
     return {leaveHours, permitHours, office };
