@@ -1,4 +1,4 @@
-# Vacation & Leave — Web (Modular Structure)
+# leave & Leave — Web (Modular Structure)
   Multi-page web app. Each page has its own HTML, CSS, and JS, with shared JavaScript modules.
 
 ## Structure
@@ -21,7 +21,7 @@
   │   ├── firebase-config.js  ← credentials + Firebase init (SHARED)
   │   ├── state.js            ← S and CAL state (SHARED)
   │   ├── holidays.js         ← public holidays for 10 countries (SHARED)
-  │   ├── calc.js             ← vacation/leave calculations (SHARED)
+  │   ├── calc.js             ← leave/leave calculations (SHARED)
   │   ├── data.js             ← load/save Firestore + listeners (SHARED)
   │   ├── i18n.js             ← IT/EN translations (SHARED)
   │   ├── app-shell.js        ← header + login guard (SHARED)

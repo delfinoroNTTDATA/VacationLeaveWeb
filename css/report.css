@@ -1,0 +1,361 @@
+/* ==================================================
+   REPORT.CSS - Output report and selection of months
+    ================================================= 
+*/
+
+/* ── REPORT ── */
+.report-controls {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    margin-bottom: 22px
+}
+
+.fg {
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+.fg label {
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted)
+}
+
+.fg select {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 9px 13px;
+    border-radius: 7px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: .88rem;
+    min-width: 130px;
+    cursor: pointer;
+    appearance: none
+}
+
+.fg select:focus {
+    outline: none;
+    border-color: var(--text)
+}
+
+.btn-run {
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: .88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s;
+    white-space: nowrap
+}
+
+.btn-run:hover {
+    background: #44403c
+}
+
+.btn-csv {
+    background: var(--office-light);
+    color: var(--office);
+    border: 1px solid var(--office)
+}
+
+.btn-csv:hover {
+    background: var(--office);
+    color: #fff
+}
+
+.report-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden
+}
+
+.report-sec {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 22px
+}
+
+.report-sec:last-child {
+    border-bottom: none
+}
+
+.report-sec-title {
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--muted);
+    margin-bottom: 13px
+}
+
+.report-amountCarriedOver-box {
+    background: var(--amountCarriedOver-light);
+    border: 1px solid #c4b5fd;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 14px
+}
+
+.report-amountCarriedOver-box .rrb-title {
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--amountCarriedOver);
+    margin-bottom: 8px
+}
+
+.report-amountCarriedOver-box .rrb-row {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap
+}
+
+.report-amountCarriedOver-box .rrb-item .rv {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--amountCarriedOver)
+}
+
+.report-amountCarriedOver-box .rrb-item .rl {
+    font-size: .72rem;
+    color: #6d28d9;
+    margin-top: 1px
+}
+
+.sum-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap
+}
+
+.sum-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem
+}
+
+.sum-lbl {
+    font-size: .74rem;
+    color: var(--muted);
+    margin-top: 2px
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px
+}
+
+.chip {
+    font-size: .78rem;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 99px
+}
+
+/* ── REPORT multi-mese ── */
+.mesi-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px
+}
+
+.mese-chip {
+    background: var(--surface2);
+    border: 2px solid var(--border);
+    color: var(--muted);
+    padding: 5px 10px;
+    border-radius: 99px;
+    cursor: pointer;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    transition: all .15s
+}
+
+.mese-chip:hover {
+    border-color: var(--muted);
+    color: var(--text)
+}
+
+.mese-chip.active {
+    background: var(--leave);
+    border-color: var(--leave);
+    color: #fff
+}
+
+.btn-mesi-all {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 3px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: .74rem;
+    font-weight: 600;
+    transition: all .15s
+}
+
+.btn-mesi-all:hover {
+    border-color: var(--text);
+    color: var(--text)
+}
+
+/* Report by month */
+.rpt-mese-block {
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden
+}
+
+.rpt-mese-header {
+    background: var(--surface2);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--border)
+}
+
+.rpt-mese-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    flex: 1
+}
+
+.rpt-mese-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap
+}
+
+.rpt-badge {
+    font-size: .74rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 99px
+}
+
+.rpt-badge-leave {
+    background: var(--leave-light);
+    color: var(--leave)
+}
+
+.rpt-badge-permit {
+    background: var(--permit-light);
+    color: var(--permit)
+}
+
+.rpt-badge-office {
+    background: var(--office-light);
+    color: var(--office)
+}
+
+.rpt-giorni {
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.rpt-tipo-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px
+}
+
+.rpt-tipo-ico {
+    font-size: 1rem;
+    margin-top: 2px;
+    flex-shrink: 0
+}
+
+.rpt-tipo-content {
+    flex: 1
+}
+
+.rpt-tipo-label {
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+    margin-bottom: 5px
+}
+
+.rpt-chips-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px
+}
+
+.rpt-chip {
+    font-size: .8rem;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 99px
+}
+
+.rpt-chip-leave {
+    background: var(--leave-light);
+    color: var(--leave)
+}
+
+.rpt-chip-permit {
+    background: var(--permit-light);
+    color: var(--permit)
+}
+
+.rpt-chip-office {
+    background: var(--office-light);
+    color: var(--office)
+}
+
+.rpt-empty {
+    color: var(--muted);
+    font-size: .82rem;
+    font-style: italic
+}
+
+/* Total at the bottom */
+.rpt-totale {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 24px
+}
+
+.rpt-tot-item {
+}
+
+.rpt-tot-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem
+}
+
+.rpt-tot-lbl {
+    font-size: .74rem;
+    color: var(--muted);
+    margin-top: 2px
+}
