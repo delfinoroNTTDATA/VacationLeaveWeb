@@ -151,7 +151,9 @@ function renderCal() {
         });
     }
 
-    function renderExtraChips(){
+}
+
+function renderExtraChips(){
         const wrap = $('extraChips');
         if (!wrap) return;
 
@@ -162,9 +164,9 @@ function renderCal() {
         wrap.querySelectorAll('.extra-chip-x').forEach(b=> {
             b.onclick= () => removeExtra(b.dataset.cc);
         });
-    }
+}
 
-    function addExtra(cc){
+function addExtra(cc){
         if (!cc) return;
 
         if ( cc === currentCountry()) return;
@@ -175,14 +177,14 @@ function renderCal() {
         if (sel) sel.value = '';
 
         renderExtraChips(); renderCal();
-    }
+}
 
-    function removeExtra(cc){
+function removeExtra(cc){
         CAL.extraCountries = CAL.extraCountries.filter(x => x !== cc);
         renderExtraChips(); renderCal();
-    }
+}
 
-    function toggleOptions(option){
+function toggleOptions(option){
         if (option === 'we'){
             CAL.inclWE = !CAL.inclWE;
             $('togWE').className= 'cal-opt-toggle' + (CAL.inclWE ? ' on' : '');
@@ -191,9 +193,9 @@ function renderCal() {
             $('togLeave').className= 'cal-opt-toggle' + (CAL.exclLeave ? ' on' : '');
         }
         clearHolidayCache(); clearMultiSelection(); renderCal();
-    }
+}
 
-    function setSelMode (mode) {
+function setSelMode (mode) {
         S.mode = mode; CAL.rangeStart = null; clearMultiSelection();
 
         ['Single' , 'Range'].forEach(n => {
@@ -204,13 +206,13 @@ function renderCal() {
         $('rangeHint').className = 'range-hint' + (mode === 'range' ? ' show' : '');
         $('btnApplyMulti').className = "btn-apply-multi";
         renderCal()
-    }
+}
 
-    function clearMultiSelection(){
+function clearMultiSelection(){
         S.sel.dates = [];  CAL.rangeStart = null;
-    }
+}
 
-    function dayClick(ds){
+function dayClick(ds){
         if (S.mode === 'single') {
             S.sel.dates = [ds];
             openModal([ds]);
@@ -225,8 +227,166 @@ function renderCal() {
                 refreshHighlightRange();
             } else {
                 const start = CAL.rangeStart <= ds ? CAL.rangeStart: ds;
-                const end = CAL.rangeStart <= ds 
+                const end = CAL.rangeStart <= ds ? ds : CAL.rangeStart;
+                S.sel.dates = rangeDays(start, end);
+                const n = S.sel.dates.length;
+                $('rangeHint').textContent = `${n} giorn${n === 1 ? 'o' : 'i'} selezionat${n === 1 ? 'o' : 'i'} - clicca Segna`;
+                const btn = $('btnApplyMulti');
+                btn.className = 'btn-apply-multi' + (n > 0 ? ' show' : '');
+                if (n > 0) btn.textContent = `Segna ${n} giorn${n === 1 ? 'o' : 'i'} ▶`;
+                CAL.rangeStart = null; renderCal(); return;
             }
+            renderCal();
         }
+}
+
+function refreshHighlightRange(){
+        document.querySelectorAll('.cal-day').forEach(el => {
+            el.classList.remove('range-start', 'range-end', 'range-mid', 'selected-multi');
+        });
+
+        if (CAL.rangeStart) {
+            const el = $('cd-'+CAL.rangeStart);
+            if (el) el.classList.add('range-start');
+        }
+}
+
+function applyMulti(){
+        if (S.sel.dates.length > 0) openModal(S.sel.dates);
+}
+
+function openModal(dates){
+        const firstEv = S.ev[dates[0]] || null;
+
+        S.sel.type = firstEv?.type || null; S.sel.qty = firstEv?.qty || 'whole';
+        S.sel.half = firstEv?.half || 'morning'; S.sel.hours = firstEv?.hours || 1;
+
+        $('mTitle').textContent = dates.length === 1 ? `Segna giornata` : `Segna ${dates.length} giorni`;
+
+        if (dates.length === 1) {
+            const [y, m, d] = dates[0].split('-');
+            $('mSub').textContent = `${d} ${MESI[parseInt(m)]} ${y}`;
+        } else {
+            const s = [...dates].sort();
+            const f = ds => {
+                const [,m, d] = ds.split('-');
+                return `${d}/${m}`;
+            };
+
+            $('mSuv').textContent = s.slice(0,5).map(f).join(', ') + (s.length > 5 ? ` + ${s.length - 5} altri` : '');
+        }
+
+        $('hoursDayLabel').textContent = S.cfg.dayHours;
+        $('hoursInput').value = S.sel.hours;
+
+        refreshOptions(); refreshQty(); $('ovl').classList.add('open');
+}
+
+function closeModal(){ $('ovl').classList.remove('open'); }
+
+function pick(t){ S.sel.type = S.sel.type === t ? null : t; refreshOptions(); }
+
+function refreshOptions(){ 
+    ['leave', 'permit', 'office'].forEach(t => {
+        $('opt-' + t).className = 'type-opt' + (S.sel.type === t ? ` sel-${t}` : '');
+    });
+}
+
+function setQty(q){ S.sel.qty = q; refreshQty(); }
+
+function setHalf(h){ 
+    S.sel.half = h;
+
+    const cls = S.sel.type === 'permit' ? 'active-p' : 'active';
+
+    $('hbMorning').className = 'half-btn' + (h === 'morning' ? ` ${cls}` : '');
+    $('hbAfternoon').className = 'half-btn' + (h === 'afternoon' ? ` ${cls}` : '');
+}
+
+function refreshQty(){
+    const isOffice = S.sel.type === 'office';c
+
+    $('qtySec').style.display = isOffice ? 'none' : 'block';
+    if (isOffice) return;
+
+    const cls = S.sel.type === 'permit' ? 'active-p' : 'active';
+
+    ['whole', 'half', 'hours'].forEach(q => {
+        $('qb' + q).className = 'qty-btn' + (S.sel.qty === q.toLowerCase() ? ` ${cls}` : '');
+    });
+
+    $('halfRow').style.display = S.sel.qty === 'half' ? 'grid' : 'none';
+    $('hoursRow').style.display = S.sel.qty === 'hours' ? 'flex' : 'none';
+
+    const hcls = S.sel.type === 'permit' ? 'active-p' : 'active';
+
+    $('hbMorning').className = 'half-btn' + (S.sel.half === 'morning' ? ` ${hcls}` : '');
+    $('hbAfternoon').className = 'half-btn' + (S.sel.half === 'afternoon' ? ` ${hcls}` : '');
+
+    if (S.sel.qty === 'hours') {
+        const h = parseInt($('hoursInput').value) || 1;
+
+        $('hoursNote').textContent = `Equivale a ${(h/S.cfg.dayHours).toFixed(2)} giorni`;
+    }else {
+        $('hoursNote').textContent = '';
     }
 }
+
+async function saveDay(){
+    if (!S.sel.type || S.sel.dates.length === 0){
+        closeModal();
+        return;
+    }
+
+    const hoursCustom = Math.max(1, parseInt($('hoursInput').value) || 1);
+    const evObj = {
+        type: S.sel.type,
+        qty: S.sel.type === 'office' ? 'whole' : S.sel.qty,
+        half: S.sel.half,
+        hours: hoursCustom
+    };
+
+    try { await saveEvents(S.sel.dates, evObj); }
+    catch(e) { 
+        alert('Errore eliminazione: ' + e.message); 
+        return; 
+    } 
+
+    clearMultiSelection(); closeModal(); $('btnApplyMulti').className = 'btn-apply-multi';
+}
+
+async function delDay() {
+    if(S.sel.dates.length === 0) { 
+        closeModal();
+        return;
+    }
+
+    try { await deleteEvents(S.sel.dates); }
+    catch (e) {
+        alert('Errore eliminazione: ' + e.message);
+        return;
+    }
+}
+
+Object.assign(window,{
+    shiftMonth, dpChange, dpToday, toggleOptions, addExtra,
+    setSelMode, applyMulti, pick, setQty, setHalf, closeModal
+});
+
+guardPage('calendar', () => {
+    dpSyncSelectors(); 
+    renderExtraChips();
+    renderCal();
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+    $('btnSave').onclick = saveDay;
+    $('btnDel').onclick = delDay;
+    $('ovl').addEventListener('click', e => {
+        if(e.target === $('ovl')) closeModal();
+    });
+    $('hoursInput').addEventListener('input', () => {
+        const h = parseInt($('hoursInput').value) || 0;
+        $('hoursNote').textContent = h > 0 ? `Equivale a ${(h/S.cfg.dayHours).toFixed(2)} giorni` : ''
+    });
+});
