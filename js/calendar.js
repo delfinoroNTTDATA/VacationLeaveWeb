@@ -1,4 +1,4 @@
-import { S, CAL, MESI} from "./state.js";
+import { S, CAL, MONTHS} from "./state.js";
 import {
     holidaysForYear,
     holidayName,
@@ -265,7 +265,7 @@ function openModal(dates){
 
         if (dates.length === 1) {
             const [y, m, d] = dates[0].split('-');
-            $('mSub').textContent = `${d} ${MESI[parseInt(m)]} ${y}`;
+            $('mSub').textContent = `${d} ${MONTHS[parseInt(m)]} ${y}`;
         } else {
             const s = [...dates].sort();
             const f = ds => {

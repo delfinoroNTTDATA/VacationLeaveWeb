@@ -2,7 +2,7 @@
 // state.js — Local shared state + costants
 // ================================================
 
-export const MESI = ['', 'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno',
+export const MONTHS = ['', 'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno',
                         'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Decembre'];
 
 // Application state (cache of Firestore data)

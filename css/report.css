@@ -167,15 +167,15 @@
     border-radius: 99px
 }
 
-/* ── REPORT multi-mese ── */
-.mesi-grid {
+/* ── REPORT multi-month ── */
+.months-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
     margin-top: 4px
 }
 
-.mese-chip {
+.month-chip {
     background: var(--surface2);
     border: 2px solid var(--border);
     color: var(--muted);
@@ -188,18 +188,18 @@
     transition: all .15s
 }
 
-.mese-chip:hover {
+.month-chip:hover {
     border-color: var(--muted);
     color: var(--text)
 }
 
-.mese-chip.active {
+.month-chip.active {
     background: var(--leave);
     border-color: var(--leave);
     color: #fff
 }
 
-.btn-mesi-all {
+.btn-months-all {
     background: none;
     border: 1px solid var(--border);
     color: var(--muted);
@@ -212,20 +212,20 @@
     transition: all .15s
 }
 
-.btn-mesi-all:hover {
+.btn-months-all:hover {
     border-color: var(--text);
     color: var(--text)
 }
 
 /* Report by month */
-.rpt-mese-block {
+.rpt-month-block {
     margin-bottom: 20px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
     overflow: hidden
 }
 
-.rpt-mese-header {
+.rpt-month-header {
     background: var(--surface2);
     padding: 14px 18px;
     display: flex;
@@ -234,13 +234,13 @@
     border-bottom: 1px solid var(--border)
 }
 
-.rpt-mese-name {
+.rpt-month-name {
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
     flex: 1
 }
 
-.rpt-mese-badges {
+.rpt-month-badges {
     display: flex;
     gap: 8px;
     flex-wrap: wrap
