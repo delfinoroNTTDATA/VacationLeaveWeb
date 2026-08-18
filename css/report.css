@@ -268,30 +268,30 @@
     color: var(--office)
 }
 
-.rpt-giorni {
+.rpt-days {
     padding: 14px 18px;
     display: flex;
     flex-direction: column;
     gap: 10px
 }
 
-.rpt-tipo-row {
+.rpt-type-row {
     display: flex;
     align-items: flex-start;
     gap: 10px
 }
 
-.rpt-tipo-ico {
+.rpt-type-ico {
     font-size: 1rem;
     margin-top: 2px;
     flex-shrink: 0
 }
 
-.rpt-tipo-content {
+.rpt-type-content {
     flex: 1
 }
 
-.rpt-tipo-label {
+.rpt-type-label {
     font-size: .72rem;
     font-weight: 700;
     text-transform: uppercase;
