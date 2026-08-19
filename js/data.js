@@ -32,8 +32,8 @@ export async function loadAmountCarriedOver(){
         S.amountCOManual = {};
         snap.forEach( d => { S.amountCOManual[d.id] = d.data(); });
         if (!S.amountCOManual['2025']) {
-            S.amountCOManual['2026'] = { leaveHours: 29, permHours: 42 };
-            await setDoc( doc( amountCORef(), '2026'), { leaveHours: 29, permHours: 42 });
+            S.amountCOManual['2026'] = { leaveHours: 29, permitHours: 42 };
+            await setDoc( doc( amountCORef(), '2026'), { leaveHours: 29, permitHours: 42 });
         }
     } catch (e) { console.warn('loadAmountCarried error', e); }
 }
@@ -81,9 +81,9 @@ export async function deleteEvents(dates){
     await batch.commit();
 }
 
-export async function saveAmountCarriedOver( yr, vactionHours, permHours){
-    S.amountCOManual[yr] = { vactionHours, permHours };
-    await setDoc( amountCORef(), yr, { vactionHours, permHours });
+export async function saveAmountCarriedOver( yr, vactionHours, permitHours){
+    S.amountCOManual[yr] = { vactionHours, permitHours };
+    await setDoc( amountCORef(), yr, { vactionHours, permitHours });
 }
 
 export async function removeAmountCarriedOver(yr){
