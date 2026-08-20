@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UFT-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ferie & Permessi - Dashboard</title>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/dashboard.css">
+    </head>
+    <body>
+        <div class="sync-bar">
+            <div class="sync-dot"></div>
+            <span data-i18n="sync_active">Sincronizzazione Firebase attiva - i dati si aggiornano in tempo reale su tutti i dispositivi</span>
+        </div>
+
+        <div class="shell">
+            <div id="amountCarriedOverBanner"></div>
+            <div class="stats-grid"  id="statsGrid"></div>
+
+            <div class="section-title" data-i18n="recent_events">Ultimi eventi</div>
+            <div class="recent-list" id="recentList"></div>
+        </div>
+
+        <script type="module" src="js/dashboard.js"></script>
+    </body>
+</html>
