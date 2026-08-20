@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ferie & Permessi - Accedi</title>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/common.css">
+    </head>
+    <body>
+        <div id="authScreen" style="display: flex;">
+            <div class="auth-logo">Ferie <em>&</em> Permessi</div>
+            <div class="auth-sub" data-i18n="login_sub">Accedi per sincronizzare sito e app</div>
+
+            <label class="auth-label" data-i18n="login_email">Email</label>
+            <input type="email" id="loginEmail" class="auth-input" placeholder="nome@email.com" autocomplete="email">
+            
+            <label class="auth-label" data-i18n="login_pass">Password</label>
+            <input type="password" id="loginPass" class="auth-input" placeholder="••••••••" autocomplete="current-password">
+
+            <div class="auth-error" id="authError"></div>
+
+            <button class="auth-btn auth-btn-primary" is="btnLogin" data-i18n="login_signin">Accedi</button>
+            <div class="auth-divider" data-i18n="login_or">— oppure —</div>
+            <button class="auth-btn auth-btn-secondary" id="btnRegister" data-i18n="login_register">Crea account</button>
+        </div>
+
+        <script type="module" src="js/login.js"></script>
+    </body>
+</html>
