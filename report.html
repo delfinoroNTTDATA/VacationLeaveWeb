@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ferie & Permessi - Report</title>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/report.css">
+    </head>
+    <body>
+        <div class="shell">
+            <div class="report-controls">
+                <div class="fg">
+                    <label>Anno</label>
+                    <select id="rYears"></select>
+                </div>
+
+                <div class="fg" style="flex: 1; min-width: 260px;">
+                    <div class="month-grid" id="monthGrid">
+                        <button class="month-chip active" data-m="1" onclick="toggleMonth(this)">Gen</button>
+                        <button class="month-chip active" data-m="2" onclick="toggleMonth(this)">Feb</button>
+                        <button class="month-chip active" data-m="3" onclick="toggleMonth(this)">Mar</button>
+                        <button class="month-chip active" data-m="4" onclick="toggleMonth(this)">Apr</button>
+                        <button class="month-chip active" data-m="5" onclick="toggleMonth(this)">Mag</button>
+                        <button class="month-chip active" data-m="6" onclick="toggleMonth(this)">Giu</button>
+                        <button class="month-chip active" data-m="7" onclick="toggleMonth(this)">Lug</button>
+                        <button class="month-chip active" data-m="8" onclick="toggleMonth(this)">Ago</button>
+                        <button class="month-chip active" data-m="9" onclick="toggleMonth(this)">Set</button>
+                        <button class="month-chip active" data-m="10" onclick="toggleMonth(this)">Ott</button>
+                        <button class="month-chip active" data-m="11" onclick="toggleMonth(this)">Nov</button>
+                        <button class="month-chip active" data-m="12" onclick="toggleMonth(this)">Dic</button>
+                    </div>
+
+                    <div style="display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap;">
+                        <button class="btn-months-all" onclick="selAllMonths(true)" data-i18n="rpt_all">Tutti</button>
+                        <button class="btn-months-all" onclick="selAllMonths(false)" data-i18n="rpt_none">Nessuno</button> 
+                    </div>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: flex-end;flex-wrap: wrap;">
+                    <button class="btn-run" onclick="buildReport()">
+                        <span data-i18n="rpt_generate">&#9654; Genera</span>
+                    </button>
+                    <button class="btn-run btn-csv" onclick="doCSV()">&#11015; CSV</button>
+                </div>
+            </div>
+
+            <div id="reportOut"></div>
+        </div>
+
+        <script type="module" src="js/report.js"></script>
+    </body>
+</html>
