@@ -160,7 +160,7 @@ export function t(key) {
     return ( I18N[LANG] && I18N[LANG][key]) || ( I18N.it[key] ) || key;
 }
 
-export function applyI28n(){
+export function applyI18n(){
     const lang = currentLang();
     document.querySelectorAll('[data-i18n]').forEach(el=>{
         const val = t(el.dataset.i18n);
