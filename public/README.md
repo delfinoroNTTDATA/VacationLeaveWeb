@@ -48,8 +48,9 @@
 
 ## Deploying to Firebase
  ```bash
-    cd ferie-web
-    firebase deploy --only hosting
+    cd <name of your project>
+    firebase use --add
+    firebase deploy --only hosting --project <name of your Firebase project>
     index.html is the initial page (login), so Firebase automatically serves it as the home page.
 ```
 ## Language
