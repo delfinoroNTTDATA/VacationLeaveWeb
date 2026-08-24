@@ -20,6 +20,7 @@ async function doLogin() {
 
     try {
         await signInWithEmailAndPassword(auth, email, pass);
+        window.location.href = 'dashboard.html';
     } catch (error) {
         $('authError').textContent = tradErr(error.code);
     }

@@ -1,7 +1,7 @@
 // ============================================
 // i18n.js — Translate Italian / English
 // ============================================
-import { LOCALES, getLocal, setLocal } from "./locales";
+import { LOCALES, getLocal, setLocal } from "./locales.js";
 
 export const I18N = {
     it: {
