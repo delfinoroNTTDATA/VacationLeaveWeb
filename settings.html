@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">\
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ferie & Permessi - Impostazioni</title>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/settings.css">
+    </head>
+
+    <body>
+       <div class="shell">
+            <div class="set-card">
+                <div class="set-title">Configurazione annuale</div>
+
+                <div class="set-row">
+                    <div>
+                        <div class="set-lbl">Giorni ferie totali</div>
+                        <div class="set-sub">Assegnazione annua contrattuale</div>
+                    </div>
+
+                    <div class="num-ctrl">
+                        <button class="num-btn" onclick="adj('leaveTotal', -1)">&#8722;</button>
+                        <div class="num-v" id="v-leaveTotal">28</div>
+                        <button class="num-btn" onclick="adj('leaveTotal', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="set-row">
+                    <div>
+                        <div class="set-leb">Ore permesso / PAR totali</div>
+                        <div class="set-sub">Ore annue disponibili</div>
+                    </div>
+
+                    <div class="num-ctrl">
+                        <button class="num-btn" onclick="adj('permitHours', -4)">&#8722;</button>
+                        <div class="num-v" id="v-permitHours">104</div>
+                        <button class="num-btn" onclick="adj('permitHours',4)">+</button>
+                    </div>
+                </div>
+
+                <div class="set-row">
+                    <div>
+                        <div class="set-lbl">Ore lavorative per giornata</div>
+                        <div class="set-sub">Default 8h</div>
+                    </div>
+
+                    <div class="num-ctrl">
+                        <button class="num-btn" onclick="adj('hoursDay', -1)">&#8722;</button>
+                        <div class="num-v" id="v-hoursDay">8</div>
+                        <button class="num-btn" onclick="adj('hoursDay', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="set-row">
+                    <div>
+                        <div class="set-lbl">Anno di riferimento</div>
+                        <div class="set-sub">Per calcoli e report</div>
+                    </div>
+
+                    <div class="num-ctrl">
+                        <button class="num-btn" onclick="adj('year', -1)">&#8722;</button>
+                        <div class="num-v" id="v-year">2026</div>
+                        <button class="num-btn" onclick="adj('year',1)">+</button>
+                    </div>
+                </div>
+
+                <div class="set-row">
+                    <div>
+                        <div class="set-lbl" data-i18n="set_paese">Lingua e festività</div>
+                        <div class="set-sub">Si imposta dal menu in alto a destra (bandiera). Cambiando lingua cambiano anche le festività mostrate</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="set-card">
+                <div class="set-title">&#128197; Riporti manuali per anno</div>
+                <p style="font-size: .82rem; color: var(--muted); margin-bottom: 18px;">Residui iniziali da aggiungere alla dotazione dell'anno (es. 2026: 29h ferie + 42h permesso già precaricati).</p>
+                <div style="display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 16px;">
+                    <div class="fg">
+                        <label>Anno</label>
+                        <select id="manYear" onchange="onManYearChange(this.value)" style="background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 9px 13px; border-radius: 7px; font-family: 'IBM Plex Sans', sans-serif; font-size: .88rem;min-width: 100px;appearance: none;"></select>
+                    </div>
+                    <div class="fg">
+                        <label>Ore ferie</label>
+                        <input type="number" id="manLeaveHours" min="0" step="0.5" value="0" style="background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 9px 13px; border-radius: 7px; font-family: 'IBM Plex Sans', sans-serif; font-size: .88rem; width: 110px; text-align: center;">
+                    </div>
+                    <div class="fg">
+                        <label>Ore permesso</label>
+                        <input type="number" id="manPermitHours" min="0" step="0.5" value="0" style="background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 9px 13px; border-radius: 7px; font-family: 'IBM Plex Sans', sans-serif; font-size: .88rem; width: 110px; text-align: center;">
+                    </div>
+                    <button id="btnSaveAmountCarriedOver" class="btn-run" onclick="saveAmountCarriedOverManual()">Salva riporto</button>
+                </div>
+
+                <div id="tabAmountCarriedOverManual"></div>
+            </div>
+
+            <div class="set-card">
+                <div class="set-title">&#128257; Riporto automatico anno precedente</div>
+
+                <div class="set-row">
+                    <div>
+                        <div class="set-lbl">Riporto automatico abilitato</div>
+                        <div class="set-sub">I residui vengono calcolati e sommati automaticamente</div>
+                    </div>
+
+                    <div class="toggle-wrap">
+                        <label class="toggle">
+                            <input type="checkbox" id="toggleAmountCarriedOver" onchange="onToggleAmountCarriedOver(this.checked)">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span class="toggle-label" id="toggleAmountCarriedOverLabel">Disabilitato</span>
+                    </div>
+
+                    <div class="amountCarriedOver-cfg" id="amountCarriedOverCfg">
+                        <div class="amountCarriedOver-cfg-title">Regole riporto</div>
+
+                        <div class="set-row" style="border: none; padding: 6px 0;">
+                            <div>
+                                <div class="set-lbl" style="font-size: .85rem;">Limite riporto ferie (giorni)</div>
+                                <div class="set-sub">0 = nessun limite</div>
+                            </div>
+
+                            <div class="num-ctrl">
+                                <button class="num-btn" onclick="adjR('maxAmountCarriedOverLeave', -1)">&#6722;</button>
+                                <div class="num-v" id="v-maxAmountCarriedOverLeave" style="font-size: 1.1rem;">0</div>
+                                <button class="num-btn" onclick="adjR('maxAmountCarriedOverLeave', 1)">+</button>
+                            </div>
+                        </div>
+
+                        <div class="set-row" style="border: none; padding: 6px 0;">
+                            <div>
+                                <div class="set-lbl" style="font-size: .85rem;">Limite riporto permesso (ore)</div>
+                                <div class="set-sub">0 = nessun limite</div>
+                            </div>
+                            
+                            <div class="num-ctrl">
+                                <button class="num-btn" onclick="adjR('maxAmountCarriedOverPermit', -4)">&#8722;</button>
+                                <div class="num-v" id="v-AmountCarriedOverPermit" style="font-size: 1.1rem;">0</div>
+                                <button class="num-btn" onclick="adjR('maxAmountCarriedOverPermit', 4)">+</button>
+                            </div>
+                        </div>
+
+                        <div class="set-row" style="border: none; padding: 6px 0;">
+                            <div>
+                                <div class="set-lbl" style="font-size: .85rem;">Scadenza riporto (mesi)</div>
+                                <div class="set-sub">0 = no scadenza</div>
+                            </div>
+
+                            <div class="num-ctrl">
+                                <button class="num-btn" onclick="adjR('monthDeadline', -1)">&#8722;</button>
+                                <div class="num-v" id="v-monthDeadline" style="font-size: 1.1rem;">0</div>
+                                <button class="num-btn" onclick="adjR('monthDeadline',1)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="set-card">
+                <div class="set-title">&#128200; Storico anni</div>
+                <div id="yearsHistory"></div>
+            </div>
+
+            <div class="set-card">
+                <div class="set-title">&#128465; Gestione dati</div>
+                <div class="set-row">
+                    <div>
+                        <div class="set-lbl">Cancella tutti gli eventi</div>
+                        <div class="set-sub">Azione irreversibile su Firestore</div>
+                    </div>
+                    <button class="btn btn-del" style="flex: 0; padding: 9px 18px;" onclick="clearAll()">Reset</button>
+                </div>
+            </div>
+       </div> 
+
+       <script type="module" src="js/settings.js"></script>
+    </body>
+</html>
