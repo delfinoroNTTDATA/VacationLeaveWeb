@@ -46,8 +46,8 @@ async function doRegister() {
     }
 }
 
-$('btnlogin').onclick = doLogin;
-$('btnregister').onclick = doRegister;
+$('btnLogin').onclick = doLogin;
+$('btnRegister').onclick = doRegister;
 $('loginPass').addEventListener('keydown', e => {
     if(e.key === 'Enter') doLogin();
 });
