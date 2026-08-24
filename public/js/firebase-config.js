@@ -11,12 +11,12 @@ import { getFirestore, doc, collection } from 'https://www.gstatic.com/firebasej
 //    Firebase Console → Project → Settings → Web App
 // ══════════════════════════════════════════════════════════
 export const firebaseConfig = {
-  apiKey:            "PASTE HERE-apiKey",
-  authDomain:        "PASTE HERE-authDomain",
-  projectId:         "PASTE HERE-projectId",
-  storageBucket:     "PASTE HERE-storageBucket",
-  messagingSenderId: "PASTE HERE-messagingSenderId",
-  appId:             "PASTE HERE-appId"
+  apiKey: "AIzaSyDaMfI_WpuzAl47lD7oiq27R_MhkfkcTmg",
+  authDomain: "ferie-roberto-delfino.firebaseapp.com",
+  projectId: "ferie-roberto-delfino",
+  storageBucket: "ferie-roberto-delfino.firebasestorage.app",
+  messagingSenderId: "35801687279",
+  appId: "1:35801687279:web:31eb60dc4def11976fe71a"
 };
 
 export const app  = initializeApp(firebaseConfig);

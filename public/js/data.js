@@ -2,8 +2,8 @@
 // data.js — Firestore Data Loading and Saving
 // ============================================
 
-import {cfgRef, db, evRef, amountCORef, session} from "./firebase-config";
-import { S } from  './state'
+import {cfgRef, db, evRef, amountCORef, session} from "./firebase-config.js";
+import { S } from  './state.js'
 import {
     doc, collection, setDoc, deleteDoc, getDocs, onSnapshot, writeBatch
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js'

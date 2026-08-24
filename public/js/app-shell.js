@@ -6,8 +6,8 @@
 import { auth, session } from './firebase-config.js';
 import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import { loadConfig, loadAmountCarriedOver, startEventsListener } from "./data";
-import { applyI28n } from "./i18n";
-import {LOCALES, getLocal} from "./locales";
+import { applyI28n } from "./i18n.js";
+import {LOCALES, getLocal} from "./locales.js";
 
 export function renderHeader(activePage) {
     const header = document.createElement("header");
@@ -65,3 +65,5 @@ export async function guardPage(activePage, onReady) {
         if (typeof onReady === 'function') onReady();
     });
 }
+
+document.addEventListener('DOMContentLoaded', renderHeader);

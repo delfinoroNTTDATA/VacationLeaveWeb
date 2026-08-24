@@ -2,7 +2,7 @@
 // calc.js — Calculate leave/permit/amount carried over
 // ====================================================
 
-import {S} from './state';
+import {S} from './state.js';
 
 export function eventHours(ev){
     if (!ev) return 0;
