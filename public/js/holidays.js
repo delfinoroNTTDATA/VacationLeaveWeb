@@ -111,7 +111,7 @@ export function clearHolidayCache() { _keyCachw = {}; }
 
 function keysFor(year, country) {
     const k = `${year}-${country}`;
-    if (!_keyCachw[k]) _keyCachw[k] = getHolidayKeys();
+    if (!_keyCachw[k]) _keyCachw[k] = getHolidayKeys(year, country);
     return _keyCachw[k];
 }
 
@@ -139,7 +139,7 @@ export function extraHolidayFor(ds) {
 export function isWeekend(ds) {
     const [year, month, day] = ds.split('-');
     const dow = new Date(parseInt(year), parseInt(month) - 1, parseInt(day)).getDay();
-    return dov === 0 || dow === 6;
+    return dow === 0 || dow === 6;
 }
 
 export function isExcluded(ds) {

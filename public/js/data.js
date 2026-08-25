@@ -50,7 +50,7 @@ export function startEventsListener(onUpdate) {
                 half: data.half || 'mattina', hours: Number(data.hours) || 8
             };
         });
-        if (snap.size > 0 || !snap.metadata.fromChache) S.ev = nuovoEv;
+        if (snap.size > 0 || !snap.metadata.fromCache) S.ev = nuovoEv;
         showSyncBadge();
         if (typeof onUpdate === 'function') onUpdate();
     }, (err) => console.warn('snapshot error', err));

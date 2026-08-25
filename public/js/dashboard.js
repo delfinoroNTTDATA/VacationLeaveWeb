@@ -12,7 +12,7 @@ function renderDah(){
         if(aCO.leaveDays > 0 || aCO.permitHours > 0){
             let parts = [];
             if(aCO.leaveDays > 0) parts.push(`<strong>+${aCO.leaveDays}gg ferie</strong> (${aCO.leaveDays * S.cfg.dayHours}h)`);
-            if(aCO.permitHour > 0) parts.push(`<strong>+${aCO.permitHours}h permesso</strong>`);
+            if(aCO.permitHours > 0) parts.push(`<strong>+${aCO.permitHours}h permesso</strong>`);
             const from = S.cfg.aCOEnabled ? `da ${yr-1} + riporto manuale` : 'riporto manuale';
             banner.innerHTML = `<div class="card-amountCarriedOver-banner">
                 <div class="crb-icon">&#128257;</div>
@@ -21,7 +21,7 @@ function renderDah(){
                     <div class="crb-detail">${parts.join(' e ')}${st.noteDeadline ? ' &mdash; '+st.noteDeadline : ''}</div>
                 </div>
             </div>`
-        }else banner.intterHTML='' ;
+        }else banner.innerHTML='' ;
         
         document.getElementById('statsGrid').innerHTML = [
             {   
@@ -47,7 +47,7 @@ function renderDah(){
                 sub: `${st.permitHours}h / ${st.permitTotalYearly}h`,
                 amountCarriedOver: aCO.permitHours > 0 ? `+${aCO.permitHours}h` : '',
                 pct: (st.permitHours / st.permitTotalYearly) * 100,
-                acc: 'var(-permit)'
+                acc: 'var(--permit)'
             },
             {
                 lbl: t('permit_days'),
@@ -65,7 +65,7 @@ function renderDah(){
                 pct: 0,
                 acc: 'var(--office)'
             }
-        ].map(c => `<div class="card" style="--accent:${c.acc}>
+        ].map(c => `<div class="card" style="--accent:${c.acc}">
                 <div class="card-label">${c.lbl}</div>
                 <div class="card-value">${c.val}</div>
                 <div class="card-sub">${c.sub}</div>
@@ -78,7 +78,7 @@ function renderDah(){
         const list = document.getElementById('recentList');
 
         if(!recent.length){ list.innerHTML = `<div class="empty-msg">
-                <span style="font-size:1.2.rem">&#128269;</span>
+                <span style="font-size:1.2rem">&#128269;</span>
                 Nessun evento. Apri il Calendario per aggiungerne.
             </div>`;
             return;

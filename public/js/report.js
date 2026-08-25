@@ -95,10 +95,10 @@ function buildReport() {
         const rows = typeRow(leave, '🌴', 'leave') + typeRow(permit, '⏰', 'permit') + typeRow(office, '🏢', 'office');
         return `<div class="rpt-month-block">
             <div class="rpt-month-header">
-                <div class="rpt-month-name>${NAME[m]} ${yr}</div>
+                <div class="rpt-month-name">${NAME[m]} ${yr}</div>
                 <div class="rpt-month-badges">${badges}</div>
             </div>
-            ${rows ? `<div class="rpt-days>${rows}</div>` : ''}
+            ${rows ? `<div class="rpt-days">${rows}</div>` : ''}
         </div>`
     });
 
@@ -108,13 +108,14 @@ function buildReport() {
             <div class="rpt-tot-lbl"> Ferie totali (${fmt2(totLH)}h)</div>
         </div>
         <div class="rpt-tot-item">
-            <div class="rpt-tot-val" style="color:var(--permit)>${fmt2(totPGG)}gg</div>
-            <div class='rpt-tot-lbl"> Permessi totali (${fmt2(totPH)}h)</div>
+            <div class="rpt-tot-val" style="color:var(--permit)">${fmt2(totPGG)}gg</div>
+            <div class="rpt-tot-lbl"> Permessi totali (${fmt2(totPH)}h)</div>
         </div>
         <div class="rpt-tot-item">
             <div class="rpt-tot-val" style="color:var(--office)">${totO}</div>
             <div class="rpt-tot-lbl"> Giorni in Sede</div>
-        </div>`
+        </div>
+    </div>`
 
     $('reportOut').innerHTML = total + blocks.join('');
 }

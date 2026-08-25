@@ -45,13 +45,13 @@ export function getAmountCarriedOverForYear(targetYear){
     for (let y = (allY[0] || targetYear); y < targetYear; y++) {
         const raw = rawStats(y);
 
-        const manY = S.amountCOManual[String(Y) || {leaveHours: 0, permitHours: 0 }];
+        const manY = S.amountCOManual[String(y)] || {leaveHours: 0, permitHours: 0 };
 
         const lTot = S.cfg.leaveTotal + acoL + fmt2(manY.leaveHours / S.cfg.dayHours);
 
         let leaveLeft = Math.max(0, lTot - day(raw.leaveHours));
 
-        if (S.cfg.maxACOleave > 0) leaveLeft =  Math.min(0, lTot - day(raw.leaveHours));
+        if (S.cfg.maxACOleave > 0) leaveLeft =  Math.min(leaveLeft, S.cfg.maxACOleave);
 
         const pTot = S.cfg.permitHours + acoP + manY.permitHours;
 
@@ -83,7 +83,7 @@ export function calcStats(year){
     }
 
     return{
-        leaveHours: raw.leaveHours, leaveCons: lCons, leaveACO: fmt2(Math.max(9,lTot - lCons)),
+        leaveHours: raw.leaveHours, leaveCons: lCons, leaveACO: fmt2(Math.max(0,lTot - lCons)),
         leaveTotalYearly: fmt2(lTot), permitHours: raw.permitHours, permitDay: day(raw.permitHours),
         permitHourACO: fmt2(Math.max(0, pTot - raw.permitHours)), permitTotalYearly: fmt2(pTot),
         officeDays: raw.office, amountCarriedOver: aco, noteDeadline

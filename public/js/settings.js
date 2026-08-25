@@ -70,7 +70,7 @@ function renderManYear(){
 
     if(!sel) return;
 
-    sel.innerHTML = years.map(y => `<option value="${y}" "${y === yr ? ' selected' : ''}">${y}</option>`);
+    sel.innerHTML = years.map(y => `<option value="${y}" ${y === yr ? 'selected' : ''}>${y}</option>`).join('');
 
     onManYearChange(String(yr));
 }
@@ -94,7 +94,7 @@ async function saveAmountCarriedOverManual() {
         const btn = $('btnSaveAmountCarriedOver');
 
 
-    } catch(e) { alert('Errore: ' + e.massage); }
+    } catch(e) { alert('Errore: ' + e.message); }
 }
 
 async function remuoveAmoubtCarriedOverManual(yr) {
@@ -102,7 +102,7 @@ async function remuoveAmoubtCarriedOverManual(yr) {
         await removeAmountCarriedOver(yr);
         renderTabAmountCarriedOverManual();
         $('yearsHistory').innerHTML = buildHistory();
-    }catch(e) { alert('Errore: ' + e.massage); }  
+    }catch(e) { alert('Errore: ' + e.message); }  
 }
 
 function renderTabAmountCarriedOverManual(){
@@ -137,7 +137,7 @@ function renderTabAmountCarriedOverManual(){
                     <td style="color:var(--muted);font-size:.8rem">${fmt2(v.leaveHours / S.cfg.dayHours)}gg</td>
                     <td class="ht-amountCarriedOver">${v.permitHours}h</td>
                     <td>
-                        <button data-yr="${y}" class="btn-rim-amountCarriedOver style="background:#fee2e2;broder:none;color:var(--danger);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:.78rem;font-weight:600">Rimuoovi</button>
+                        <button data-yr="${y}" class="btn-rim-amountCarriedOver" style="background:#fee2e2;border:none;color:var(--danger);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:.78rem;font-weight:600">Rimuovi</button>
                     </td>
                 </tr>`                    
              ).join('')}
@@ -166,7 +166,7 @@ function buildHistory(){
             <td> ${st.leaveCons}gg / ${st.leaveTotalYearly}gg
                 ${riL > 0 ? `<span class = "ht-amountCarriedOver">(+${riL}gg)</span>` : ''}
             </td>
-            <td class="${st.leaveACO > 0? 'ht-amountCarriedOver' : 'ht-zero'}>${st.leaveACO > 0 ? '+' + st.leaveACO + 'gg' : '-'}</td>
+            <td class="${st.leaveACO > 0? 'ht-amountCarriedOver' : 'ht-zero'}">${st.leaveACO > 0 ? '+' + st.leaveACO + 'gg' : '-'}</td>
             <td>${st.permitHours}h / ${st.permitTotalYearly}h
                 ${riP > 0 ? ` <span class="ht-amountCarriedOver">(+${riP}h)</span>` : ''}
             </td>
@@ -194,7 +194,7 @@ async function clearAll() {
     const snap = await getDocs(evRef());
     const batch = writeBatch(db);
 
-    snap.forEach(d => batch.delete(d.amountCarriedOver));
+    snap.forEach(d => batch.delete(d.ref));
     await batch.commit();
     $('yearsHistory').innerHTML = buildHistory();
 }

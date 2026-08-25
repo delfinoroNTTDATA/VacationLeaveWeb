@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
     <head>
-        <meta charset="UTF-8">\
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Ferie & Permessi - Impostazioni</title>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -29,7 +29,7 @@
 
                 <div class="set-row">
                     <div>
-                        <div class="set-leb">Ore permesso / PAR totali</div>
+                        <div class="set-lbl">Ore permesso / PAR totali</div>
                         <div class="set-sub">Ore annue disponibili</div>
                     </div>
 
@@ -47,9 +47,9 @@
                     </div>
 
                     <div class="num-ctrl">
-                        <button class="num-btn" onclick="adj('hoursDay', -1)">&#8722;</button>
-                        <div class="num-v" id="v-hoursDay">8</div>
-                        <button class="num-btn" onclick="adj('hoursDay', 1)">+</button>
+                        <button class="num-btn" onclick="adj('dayHours', -1)">&#8722;</button>
+                        <div class="num-v" id="v-dayHours">8</div>
+                        <button class="num-btn" onclick="adj('dayHours', 1)">+</button>
                     </div>
                 </div>
 
@@ -123,9 +123,9 @@
                             </div>
 
                             <div class="num-ctrl">
-                                <button class="num-btn" onclick="adjR('maxAmountCarriedOverLeave', -1)">&#6722;</button>
-                                <div class="num-v" id="v-maxAmountCarriedOverLeave" style="font-size: 1.1rem;">0</div>
-                                <button class="num-btn" onclick="adjR('maxAmountCarriedOverLeave', 1)">+</button>
+                                <button class="num-btn" onclick="adjR('maxACOleave', -1)">&#8722;</button>
+                                <div class="num-v" id="v-maxACOleave" style="font-size: 1.1rem;">0</div>
+                                <button class="num-btn" onclick="adjR('maxACOleave', 1)">+</button>
                             </div>
                         </div>
 
@@ -136,9 +136,9 @@
                             </div>
                             
                             <div class="num-ctrl">
-                                <button class="num-btn" onclick="adjR('maxAmountCarriedOverPermit', -4)">&#8722;</button>
-                                <div class="num-v" id="v-AmountCarriedOverPermit" style="font-size: 1.1rem;">0</div>
-                                <button class="num-btn" onclick="adjR('maxAmountCarriedOverPermit', 4)">+</button>
+                                <button class="num-btn" onclick="adjR('maxACOPerm', -4)">&#8722;</button>
+                                <div class="num-v" id="v-maxACOPerm" style="font-size: 1.1rem;">0</div>
+                                <button class="num-btn" onclick="adjR('maxACOPerm', 4)">+</button>
                             </div>
                         </div>
 

@@ -21,11 +21,11 @@ function dpSyncSelectors () {
 
     const year = [];
 
-    for (let i = S.vm.y-10; i < S.vm.y+10; i++) {
+    for (let i = S.vm.y - 5; i <= S.vm.y + 5; i++) {
         year.push(i);
     }
 
-    yS.innerHTML = year.map( y => `<optin value="${y}" "${y === S.vm.y ? 'selected' : ''}">${y}</optin>`).join('');
+    yS.innerHTML = year.map( y => `<option value="${y}" ${y === S.vm.y ? 'selected' : ''}>${y}</option>`).join('');
     mS.value = String(S.vm.m);
 }
 
@@ -87,10 +87,10 @@ function renderCal() {
     let html = '';
 
     for (let i = 0; i < offset; i++){
-        html = `<div class="cal -day empty"></div>`;
+        html += `<div class="cal-day empty"></div>`;
     }
 
-    for (let d = 0; d <= dim; d++){
+    for (let d = 1; d <= dim; d++){
         const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
         const ev = S.ev[ds];
         const dow= new Date(y,m,d).getDay();
@@ -128,7 +128,7 @@ function renderCal() {
                 }
             }
 
-            tag = `<div class="dtag dtag-${ev.tipo}" > ${icon} ${lbl}${qNote}</div>`
+            tag = `<div class="dtag dtag-${ev.type}" > ${icon} ${lbl}${qNote}</div>`
         }
 
         if (isHoliday){
@@ -143,14 +143,13 @@ function renderCal() {
 
         html += `<div class="${cls}" id="cd-${ds}" data-ds="${ds}"><div class="dn">${d}</div>
                  <div class="day-tags">${tag}</div></div>`
-
-        $('calDays').innerHTML = html;
-
-        $('calDays').querySelectorAll('.cal-day[data-ds]').forEach(el =>{
-            el.onclick= () => dayClick(el.dataset.ds);
-        });
     }
 
+    $('calDays').innerHTML = html;
+
+    $('calDays').querySelectorAll('.cal-day[data-ds]').forEach(el =>{
+        el.onclick= () => dayClick(el.dataset.ds);
+    });
 }
 
 function renderExtraChips(){
@@ -187,7 +186,7 @@ function removeExtra(cc){
 function toggleOptions(option){
         if (option === 'we'){
             CAL.inclWE = !CAL.inclWE;
-            $('togWE').className= 'cal-opt-toggle' + (CAL.inclWE ? ' on' : '');
+            $('togWe').className= 'cal-opt-toggle' + (CAL.inclWE ? ' on' : '');
         } else {
             CAL.exclLeave = !CAL.exclLeave;
             $('togLeave').className= 'cal-opt-toggle' + (CAL.exclLeave ? ' on' : '');
@@ -273,7 +272,7 @@ function openModal(dates){
                 return `${d}/${m}`;
             };
 
-            $('mSuv').textContent = s.slice(0,5).map(f).join(', ') + (s.length > 5 ? ` + ${s.length - 5} altri` : '');
+            $('mSub').textContent = s.slice(0,5).map(f).join(', ') + (s.length > 5 ? ` + ${s.length - 5} altri` : '');
         }
 
         $('hoursDayLabel').textContent = S.cfg.dayHours;

@@ -12,7 +12,7 @@ import {LOCALES, getLocal} from "./locales.js";
 export function renderHeader(activePage) {
     const header = document.createElement("header");
     header.innerHTML = `
-        <div class= "logo" data-i18n= "name" > Ferie <eem>&</eem> Permessi</div>
+        <div class= "logo" data-i18n= "name" > Ferie <em>&</em> Permessi</div>
         <nav>
             <a class="nav-btn ${activePage === 'dashboard' ? 'active' : '' }" href="dashboard.html" data-i18n = "nav_dashboard">Dashboard</a>
             <a class="nav-btn ${activePage === 'calendar' ? 'active' : '' }" href="calendar.html" data-i18n = "nav_calendar">Calendario</a>
