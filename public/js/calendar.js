@@ -10,7 +10,7 @@ import {
     COUNTRY_NAME,
     isWeekend
 } from "./holidays.js";
-import { saveEvents, deleteEvents} from "./data.js";
+import { saveEvents, deleteEvents, saveDayEntries } from "./data.js";
 import { calcStats } from "./calc.js";
 import { guardPage } from "./app-shell.js";
 
@@ -98,7 +98,7 @@ function renderCal() {
 
     for (let d = 1; d <= dim; d++){
         const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        const ev = S.ev[ds];
+        const entries = S.ev[ds] || [];
         const dow= new Date(y,m,d).getDay();
         const isWeekend = dow === 0 || dow === 6;
         const isHoliday =  holidays.has(ds);
@@ -121,7 +121,7 @@ function renderCal() {
 
         let tag = '';
 
-        if (ev) {
+        entries.forEach(ev => {
             const icon = ev.type === 'leave' ? '🌴' : ev.type === 'permit' ? '⏰':'🏢';
             const lbl = ev.type === 'leave' ? 'Ferie' : ev.type === 'permit' ? 'Permesso' : 'Sede';
             let qNote= '';
@@ -134,8 +134,8 @@ function renderCal() {
                 }
             }
 
-            tag = `<div class="dtag dtag-${ev.type}" > ${icon} ${lbl}${qNote}</div>`
-        }
+            tag += `<div class="dtag dtag-${ev.type}" > ${icon} ${lbl}${qNote}</div>`
+        });
 
         if (isHoliday){
              const name = holidayName(ds) || 'Festivo';
@@ -284,11 +284,43 @@ function applyMulti(){
         if (S.sel.dates.length > 0) openModal(S.sel.dates);
 }
 
-function openModal(dates){
-        const firstEv = S.ev[dates[0]] || null;
+function describeType(t){
+        return t === 'leave' ? 'Ferie' : t === 'permit' ? 'Permesso' : 'Sede';
+}
 
-        S.sel.type = firstEv?.type || null; S.sel.qty = firstEv?.qty || 'whole';
-        S.sel.half = firstEv?.half || 'morning'; S.sel.hours = firstEv?.hours || 1;
+function openModal(dates){
+        const existing = dates.length === 1 ? (S.ev[dates[0]] || []) : [];
+        const halfEntries = existing.filter(e => e.qty === 'half');
+        const existingInfo = $('mExisting');
+
+        if (halfEntries.length === 2) {
+            const morning = halfEntries.find(e => e.half === 'morning');
+            const afternoon = halfEntries.find(e => e.half === 'afternoon');
+
+            existingInfo.textContent = `Mattina: ${describeType(morning.type)} · Pomeriggio: ${describeType(afternoon.type)}`;
+            existingInfo.style.display = 'block';
+
+            S.sel.type = morning.type; S.sel.qty = 'half';
+            S.sel.half = 'morning'; S.sel.hours = 1;
+
+        } else if (halfEntries.length === 1) {
+            const ev = halfEntries[0];
+            const missingHalf = ev.half === 'morning' ? 'afternoon' : 'morning';
+
+            existingInfo.textContent = `Già segnato: ${ev.half === 'morning' ? 'Mattina' : 'Pomeriggio'} – ${describeType(ev.type)}. Scegli il tipo per l'altra metà.`;
+            existingInfo.style.display = 'block';
+
+            S.sel.type = null; S.sel.qty = 'half';
+            S.sel.half = missingHalf; S.sel.hours = 1;
+
+        } else {
+            const firstEv = existing[0] || null;
+
+            existingInfo.textContent = ''; existingInfo.style.display = 'none';
+
+            S.sel.type = firstEv?.type || null; S.sel.qty = firstEv?.qty || 'whole';
+            S.sel.half = firstEv?.half || 'morning'; S.sel.hours = firstEv?.hours || 1;
+        }
 
         $('mTitle').textContent = dates.length === 1 ? `Segna giornata` : `Segna ${dates.length} giorni`;
 
@@ -369,14 +401,22 @@ async function saveDay(){
     }
 
     const hoursCustom = Math.max(1, parseInt($('hoursInput').value) || 1);
-    const evObj = {
+    const newEntry = {
         type: S.sel.type,
         qty: S.sel.type === 'office' ? 'whole' : S.sel.qty,
         half: S.sel.half,
         hours: hoursCustom
     };
 
-    try { await saveEvents(S.sel.dates, evObj); }
+    try {
+        if (S.sel.dates.length === 1 && newEntry.qty === 'half') {
+            const ds = S.sel.dates[0];
+            const otherHalf = (S.ev[ds] || []).find(e => e.qty === 'half' && e.half !== newEntry.half);
+            await saveDayEntries(ds, otherHalf ? [otherHalf, newEntry] : [newEntry]);
+        } else {
+            await saveEvents(S.sel.dates, newEntry);
+        }
+    }
     catch(e) { 
         alert('Errore salvataggio: ' + e.message); 
         return; 

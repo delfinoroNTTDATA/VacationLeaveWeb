@@ -19,12 +19,14 @@ export function fmt2(n){ return +( n.toFixed(2)); }
 export function rawStats(year) {
     let leaveHours= 0 , permitHours= 0, office=0;
     const yStr= String(year)+'-';
-    Object.entries(S.ev).forEach( ([k, ev]) => {
+    Object.entries(S.ev).forEach( ([k, entries]) => {
         if (!k.startsWith(yStr)) return;
-        const o = eventHours(ev);
-        if (ev.type === 'leave' ) leaveHours+=o;
-        else if(ev.type === 'permit' ) permitHours+=o;
-        else if(ev.type === 'office' ) office+=o;
+        (Array.isArray(entries) ? entries : [entries]).forEach(ev => {
+            const o = eventHours(ev);
+            if (ev.type === 'leave' ) leaveHours+=o;
+            else if(ev.type === 'permit' ) permitHours+=o;
+            else if(ev.type === 'office' ) office+=o;
+        });
     });
     return {leaveHours, permitHours, office };
 }

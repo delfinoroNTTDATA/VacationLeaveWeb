@@ -12,6 +12,11 @@
   --danger:#dc2626; --radius:12px; --accent:#1d4ed8;
 }
 /* ── Calendar ── */
+.shell.shell-calendar {
+    max-width: 100%;
+    padding: 36px 48px
+}
+
 .cal-toolbar {
     display: flex;
     align-items: center;

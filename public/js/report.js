@@ -11,6 +11,12 @@ const NAME = ['', 'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 
 
 function getSelectedMonth() { return [...document.querySelectorAll('.month-chip.active')].map( b => parseInt(b.dataset.m)); }
 
+function flattenEv(evObj) {
+    return Object.entries(evObj).flatMap(([k, entries]) =>
+        (Array.isArray(entries) ? entries : [entries]).map(ev => [k, ev])
+    );
+}
+
 function toggleMonth(btn) { btn.classList.toggle('active'); }
 
 function selAllMonths(tutti) { document.querySelectorAll('.month-chip').forEach( b => {
@@ -54,7 +60,7 @@ function buildReport() {
         return;
     }
 
-    const evYear = Object.entries(S.ev).filter(([k]) => k.startsWith(String(yr) + '-')).sort(([a], [b]) => a.localeCompare(b));
+    const evYear = flattenEv(S.ev).filter(([k]) => k.startsWith(String(yr) + '-')).sort(([a], [b]) => a.localeCompare(b));
 
     let totLGG = 0, totLH = 0, totPGG= 0, totPH = 0, totO= 0;
 
@@ -123,7 +129,7 @@ function buildReport() {
 function doCSV(){
     const yr = parseInt($('rYears').value);
     const months = getSelectedMonth();
-    const evL = Object.entries(S.ev).filter(([k]) => {
+    const evL = flattenEv(S.ev).filter(([k]) => {
         if(!k.startsWith(String(yr) + '-')) return false; return months.includes(parseInt(k.slice(5,7)));
     }).sort(([a],[b]) => a.localeCompare(b));
 

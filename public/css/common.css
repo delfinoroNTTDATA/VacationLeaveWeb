@@ -338,7 +338,17 @@ nav {
 .modal-sub {
   font-size: .81rem;
   color: var(--muted);
-  margin-bottom: 18px
+  margin-bottom: 6px
+}
+
+.modal-existing {
+  font-size: .8rem;
+  color: var(--text);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 16px
 }
 
 .type-row {

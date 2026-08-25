@@ -44,11 +44,23 @@ export function startEventsListener(onUpdate) {
         const nuovoEv = {};
         snap.forEach(d => {
             const data = d.data();
-            if (!data.type) return;
-            nuovoEv[d.id] = {
-                type: data.type || 'leave', qty: data.qty || 'whole',
-                half: data.half || 'mattina', hours: Number(data.hours) || 8
-            };
+            let entries;
+
+            if (Array.isArray(data.entries)) {
+                entries = data.entries.map(e => ({
+                    type: e.type || 'leave', qty: e.qty || 'whole',
+                    half: e.half || 'morning', hours: Number(e.hours) || 8
+                }));
+            } else if (data.type) {
+                entries = [{
+                    type: data.type || 'leave', qty: data.qty || 'whole',
+                    half: data.half || 'morning', hours: Number(data.hours) || 8
+                }];
+            } else {
+                return;
+            }
+
+            if (entries.length > 0) nuovoEv[d.id] = entries;
         });
         if (snap.size > 0 || !snap.metadata.fromCache) S.ev = nuovoEv;
         showSyncBadge();
@@ -71,8 +83,12 @@ export function showSyncBadge() {
 
 export async function saveEvents(dates, evObj){
     const batch = writeBatch(db);
-    dates.forEach( ds => batch.set( doc( evRef(), ds ), evObj ));
+    dates.forEach( ds => batch.set( doc( evRef(), ds ), { entries: [evObj] } ));
     await batch.commit();
+}
+
+export async function saveDayEntries(ds, entries){
+    await setDoc( doc( evRef(), ds ), { entries } );
 }
 
 export async function deleteEvents(dates){

@@ -10,7 +10,7 @@
     </head>
 
     <body>
-        <div class="shell">
+        <div class="shell shell-calendar">
             <div class="cal-toolbar">
                     <div class="dp-wrap">
                     <button class="cal-nav-btn" onclick="shiftMonth(-1)" title="Mese precedente">&#8249;</button>
@@ -93,6 +93,7 @@
             <div class="modal">
                 <div class="modal-title" id="mTitle">Segna giornata</div>
                 <div class="modal-sub" id="mSub"></div>
+                <div class="modal-existing" id="mExisting" style="display:none;"></div>
                 <div class="type-row">
                     <button class="type-opt" id="opt-leave" onclick="pick('leave')">
                         <span class="ico">&#127804;</span>

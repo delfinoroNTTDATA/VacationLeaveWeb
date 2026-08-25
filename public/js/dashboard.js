@@ -84,22 +84,25 @@ function renderDah(){
             return;
         }
 
-        list.innerHTML= recent.map(([d, ev]) => {
+        list.innerHTML= recent.map(([d, entries]) => {
             const [y, m, dd] = d.split('-');
-            const ico = ev.type === 'leave' ? '🌴' : ev.type === 'permit' ? '⏰' : '🏢';
-            const lbl = ev.type === 'leave' ? t('t_leave') : ev.type === 'permit' ? t('t_permit') : t('t_office');
-            let qNote = '';
 
-            if(ev.type !== 'office'){
-                if(ev.qty === 'half'){
-                    qNote = ` — ½ ${ev.half === 'morning' ? 'Mattina' : 'Pomeriggio'}`;
-                } else if (ev.qty === 'hours') qNote = ` - ${ev.hours}h`;
-            }
-            return `<div class="recent-row">
-                <span style="font-size:1.2rem">${ico}</span>
-                <span style="flex:1; font-weight:500">${dd}/${m}/${y}<span style="font-size:.74rem; color:var(--muted)">${qNote}</span></span>
-                <span class="badge badge-${ev.type}">${lbl}</span>
-            </div>`
+            return entries.map(ev => {
+                const ico = ev.type === 'leave' ? '🌴' : ev.type === 'permit' ? '⏰' : '🏢';
+                const lbl = ev.type === 'leave' ? t('t_leave') : ev.type === 'permit' ? t('t_permit') : t('t_office');
+                let qNote = '';
+
+                if(ev.type !== 'office'){
+                    if(ev.qty === 'half'){
+                        qNote = ` — ½ ${ev.half === 'morning' ? 'Mattina' : 'Pomeriggio'}`;
+                    } else if (ev.qty === 'hours') qNote = ` - ${ev.hours}h`;
+                }
+                return `<div class="recent-row">
+                    <span style="font-size:1.2rem">${ico}</span>
+                    <span style="flex:1; font-weight:500">${dd}/${m}/${y}<span style="font-size:.74rem; color:var(--muted)">${qNote}</span></span>
+                    <span class="badge badge-${ev.type}">${lbl}</span>
+                </div>`
+            }).join('');
         }).join('');
     }
 }
