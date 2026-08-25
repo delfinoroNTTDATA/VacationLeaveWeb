@@ -90,7 +90,7 @@ function renderCal() {
         html = `<div class="cal -day empty"></div>`;
     }
 
-    for (let d = 0; d <= dim; i++){
+    for (let d = 0; d <= dim; d++){
         const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
         const ev = S.ev[ds];
         const dow= new Date(y,m,d).getDay();

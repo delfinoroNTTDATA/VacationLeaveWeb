@@ -2,10 +2,10 @@
 <html lang="it">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="widith=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Ferie & Permessi - Calendario</title>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="ccs/common.css">
+        <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/calendar.css">
     </head>
 
@@ -31,6 +31,7 @@
                     <span class="dp-sep">/</span>
                     <select class="dp-sel dp-year" id="dpYear" onchange="dpChange()"></select>
                     <button class="dp-today" onclick="dpToday()">Oggi</button>
+                    <button class="cal-nav-btn" onclick="shiftMonth(1)" title="Mese successivo">&#8250;</button>
                 </div>
                 <div class="legend">
                     <div class="legendd-item">

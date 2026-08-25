@@ -177,7 +177,7 @@ export function applyI18n(){
 
 export function changeLocal(code){
     setLocal(code);
-    applyI28n();
+    applyI18n();
     document.dispatchEvent(new CustomEvent('localchange'));
 }
 

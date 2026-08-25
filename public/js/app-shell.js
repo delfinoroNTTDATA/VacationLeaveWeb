@@ -5,8 +5,8 @@
 
 import { auth, session } from './firebase-config.js';
 import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-import { loadConfig, loadAmountCarriedOver, startEventsListener } from "./data";
-import { applyI28n } from "./i18n.js";
+import { loadConfig, loadAmountCarriedOver, startEventsListener } from "./data.js";
+import { applyI18n } from "./i18n.js";
 import {LOCALES, getLocal} from "./locales.js";
 
 export function renderHeader(activePage) {
@@ -56,7 +56,7 @@ export async function guardPage(activePage, onReady) {
         await loadConfig();
         await loadAmountCarriedOver();
 
-        applyI28n();
+        applyI18n();
 
         startEventsListener(() => {
             if (typeof onReady === 'function') onReady();

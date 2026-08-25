@@ -26,7 +26,7 @@ function initReport() {
     const yr = S.cfg.year;
     const allY = [ ...new Set([yr-2, yr-1, yr, yr+1, ...Object.keys(S.ev).map( y => parseInt(y.slice(0, 4)))])].sort((a,b) => b-a);
 
-    $('rYear').innerHTML = allY.map( y => `<option value="${y}" ${y===yr?'selected':''}>${y}</option>`).join('');
+    $('rYears').innerHTML = allY.map( y => `<option value="${y}" ${y===yr?'selected':''}>${y}</option>`).join('');
 }
 
 function fmtDay(ds, ev) {
@@ -44,7 +44,7 @@ function fmtDay(ds, ev) {
 }
 
 function buildReport() {
-    const yr = parseInt($('rYear').value);
+    const yr = parseInt($('rYears').value);
     const months = getSelectedMonth();
 
     if (months.length === 0) {
@@ -66,7 +66,7 @@ function buildReport() {
         const office = evM.filter(([,ev]) => ev.type === 'office');
         const oL = leave.reduce((a,[,ev]) => a + eventHours(ev), 0);
         const oP = permit.reduce((a,[,ev]) => a + eventHours(ev), 0);
-        const lGG = gg(oL) , pGG= gg(oP);
+        const lGG = day(oL) , pGG= day(oP);
 
         totLGG += lGG; totLH += oL; 
         totPGG += pGG; totPH += oP; totO += office.length;
@@ -120,7 +120,7 @@ function buildReport() {
 }
 
 function doCSV(){
-    const yr = parseInt($('rYear').value);
+    const yr = parseInt($('rYears').value);
     const months = getSelectedMonth();
     const evL = Object.entries(S.ev).filter(([k]) => {
         if(!k.startsWith(String(yr) + '-')) return false; return months.includes(parseInt(k.slice(5,7)));
