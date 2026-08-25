@@ -102,8 +102,8 @@ function renderDah(){
             </div>`
         }).join('');
     }
-
-    guardPage('dashboard', renderDah);
-
-    document.addEventListener('localechange', renderDah);
 }
+
+guardPage('dashboard', renderDah);
+
+document.addEventListener('localechange', renderDah);

@@ -21,7 +21,7 @@ function dpSyncSelectors () {
 
     const year = [];
 
-    for (let i = S.vm.y; i < S.vm.y; i++) {
+    for (let i = S.vm.y-10; i < S.vm.y+10; i++) {
         year.push(i);
     }
 

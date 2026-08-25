@@ -65,5 +65,3 @@ export async function guardPage(activePage, onReady) {
         if (typeof onReady === 'function') onReady();
     });
 }
-
-document.addEventListener('DOMContentLoaded', renderHeader);
