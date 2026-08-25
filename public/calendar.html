@@ -34,17 +34,22 @@
                     <button class="cal-nav-btn" onclick="shiftMonth(1)" title="Mese successivo">&#8250;</button>
                 </div>
                 <div class="legend">
-                    <div class="legendd-item">
+                    <div class="legend-item">
                         <div class="legend-dot" style="background:var(--leave);"></div>
+                        <span>Ferie</span>
+                        <span class="legend-stat" id="legStatLeave"></span>
                     </div>
-                Ferie</div>
-                <div class="legend-item">
-                    <div class="legend-dot" style="background: var(--permit);"></div>
-                Permesso</div>
-                <div class="legend-item">
-                    <div class="legend-dot" style="background: var(--office);"></div>
-                Sede</div>
-            </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: var(--permit);"></div>
+                        <span>Permesso</span>
+                        <span class="legend-stat" id="legStatPermit"></span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: var(--office);"></div>
+                        <span>Sede</span>
+                        <span class="legend-stat" id="legStatOffice"></span>
+                    </div>
+                </div>
 
             <div class="sel-bar">
                 <span class="sel-bar-label" data-i18n="mode_label">Modalità</span>
@@ -54,7 +59,8 @@
                 <button class="sel-mode-btn" id="btnModeRange" onclick="setSelMode('range')">
                     <span data-i18n="mode_range">&#8614; Intervallo</span>
                 </button>
-                <span class="range-hint" id="rangeHint">Clicca inizio periodo</span>
+                <span class="range-hint" id="rangeHint">Seleziona il primo giorno</span>
+                <button class="btn-cancel-multi" id="btnCancelMulti" onclick="cancelSelection()">Annulla</button>
                 <button class="btn-apply-multi" id="btnApplyMulti" onclick="applyMulti()">Segna selezionati &#9658;</button>
             </div>
 
@@ -63,7 +69,7 @@
                     <span class="tog-ico">&#128467;</span>
                     <span data-i18n="incl_weekend">Includi Sab/Dom</span>
                 </label>
-                <label class="cal-opt-togglw on" id="togLeave" onclick="toggleOptions('leave')">
+                <label class="cal-opt-toggle on" id="togLeave" onclick="toggleOptions('leave')">
                     <span class="tog-ico">&#127881;</span>
                     <span data-i18n="excl_holidays">Escludi festivi</span>
                 </label>

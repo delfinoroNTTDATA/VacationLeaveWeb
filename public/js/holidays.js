@@ -21,10 +21,10 @@ export function getHolidayKeys(year, country) {
         const i= Math.floor(c / 4), k= c % 4;
         const l= (32 + 2 * e + 2 * i - h2 - k) % 7;
         const m= Math.floor((a + 11 * h2 + 22 * l) / 451);
-        const mo= Math.floor(( h2 + l - 7 + m + 114) / 31) + 1;
-        const day= ((h2 + l - 7 + m + 114) % 31) + 1;
+        const mo= Math.floor(( h2 + l - 7 * m + 114) / 31);
+        const day= ((h2 + l - 7 * m + 114) % 31) + 1;
 
-        return new Date(y, mo, day);
+        return new Date(y, mo - 1, day);
     }
 
     const eD = easter(year);
@@ -144,7 +144,7 @@ export function isWeekend(ds) {
 
 export function isExcluded(ds) {
     if (isWeekend(ds) && !CAL.inclWE) return true;
-    if (isHoliday(ds) && !CAL.exclLeave) return true;
+    if (isHoliday(ds) && CAL.exclLeave) return true;
     return false;
 }
 

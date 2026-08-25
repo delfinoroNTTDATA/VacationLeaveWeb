@@ -9,7 +9,7 @@ export function eventHours(ev){
     if (ev.type === 'office') return S.cfg.dayHours;
     if (ev.qty === 'whole') return S.cfg.dayHours;
     if (ev.qty === 'half') return S.cfg.dayHours / 2;
-    if (ev.qty === 'ore') return S.cfg.dayHours;
+    if (ev.qty === 'hours') return Number(ev.hours) || S.cfg.dayHours;
     return S.cfg.dayHours;
 }
 export function day(hours){ return +( hours / S.cfg.dayHours ).toFixed(2); }

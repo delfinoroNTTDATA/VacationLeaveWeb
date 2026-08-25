@@ -11,6 +11,7 @@ import {
     isWeekend
 } from "./holidays.js";
 import { saveEvents, deleteEvents} from "./data.js";
+import { calcStats } from "./calc.js";
 import { guardPage } from "./app-shell.js";
 
 const $ = id => document.getElementById(id);
@@ -42,7 +43,7 @@ function shiftMonth(d) {
         S.vm.y++;
     }
 
-    clearMultiSel();
+    clearMultiSelection();
     dpSyncSelectors();
     renderCal();
 }
@@ -51,7 +52,7 @@ function dpChange() {
     S.vm.m = parseInt($('dpMonth').value);
     S.vm.y = parseInt($('dpYear').value);
 
-    clearMultiSel();
+    clearMultiSelection();
     renderCal();
 }
 
@@ -61,7 +62,7 @@ function dpToday() {
     S.vm.y = t.getFullYear();
     S.vm.m = t.getMonth();
 
-    clearMultiSel();
+    clearMultiSelection();
     dpSyncSelectors();
     renderCal()
 }
@@ -79,10 +80,15 @@ function renderCal() {
 
     let rStart = null, rEnd = null;
 
-    if (S.mode === 'year' && S.sel.dates.length >= 2){
-        rStart = [...S.vm.dates].sort()[0]; rEnd= [...S.vm.dates].sort().slice(-1)[0];
-
-    } else if (S.mode === 'range' && CAL.rangeStart) { rStart = CAL.rangeStart}
+    if (S.mode === 'range') {
+        if (S.sel.dates.length > 0) {
+            const sortedSel = [...S.sel.dates].sort();
+            rStart = sortedSel[0];
+            rEnd = sortedSel[sortedSel.length - 1];
+        } else if (CAL.rangeStart) {
+            rStart = CAL.rangeStart;
+        }
+    }
 
     let html = '';
 
@@ -120,11 +126,11 @@ function renderCal() {
             const lbl = ev.type === 'leave' ? 'Ferie' : ev.type === 'permit' ? 'Permesso' : 'Sede';
             let qNote= '';
 
-            if (ev.type === 'office') {
+            if (ev.type !== 'office') {
                 if (ev.qty === 'half') {
-                    qNote = `${ev.half==='morning'? 'M' : 'P'}`;
+                    qNote = ` ½${ev.half==='morning'? 'M' : 'P'}`;
                 } else if (ev.qty === 'hours') {
-                    qNote = `${ev.hours}h`;
+                    qNote = ` ${ev.hours}h`;
                 }
             }
 
@@ -150,6 +156,21 @@ function renderCal() {
     $('calDays').querySelectorAll('.cal-day[data-ds]').forEach(el =>{
         el.onclick= () => dayClick(el.dataset.ds);
     });
+
+    updateLegendStats();
+}
+
+function updateLegendStats(){
+    const st = calcStats(S.vm.y);
+
+    const leaveEl = $('legStatLeave');
+    if (leaveEl) leaveEl.textContent = `${st.leaveCons}gg usate · ${st.leaveACO}gg residue`;
+
+    const permitEl = $('legStatPermit');
+    if (permitEl) permitEl.textContent = `${st.permitHours}h usate · ${st.permitHourACO}h residue`;
+
+    const officeEl = $('legStatOffice');
+    if (officeEl) officeEl.textContent = `${st.officeDays}gg`;
 }
 
 function renderExtraChips(){
@@ -194,21 +215,37 @@ function toggleOptions(option){
         clearHolidayCache(); clearMultiSelection(); renderCal();
 }
 
-function setSelMode (mode) {
-        S.mode = mode; CAL.rangeStart = null; clearMultiSelection();
+const RANGE_HINT_DEFAULT = 'Seleziona il primo giorno';
 
-        ['Single' , 'Range'].forEach(n => {
-            const id = 'btnMode'+ n;
+function setSelMode (mode) {
+        S.mode = mode; clearMultiSelection();
+
+        ['single' , 'range'].forEach(n => {
+            const id = 'btnMode'+ n.charAt(0).toUpperCase() + n.slice(1);
             if ($(id)) $(id).className = 'sel-mode-btn' + (S.mode === n ? ' active' : '');
         })
 
         $('rangeHint').className = 'range-hint' + (mode === 'range' ? ' show' : '');
-        $('btnApplyMulti').className = "btn-apply-multi";
         renderCal()
 }
 
 function clearMultiSelection(){
-        S.sel.dates = [];  CAL.rangeStart = null;
+        S.sel.dates = [];
+        CAL.rangeStart = null;
+
+        const hint = $('rangeHint');
+        if (hint) hint.textContent = RANGE_HINT_DEFAULT;
+
+        const applyBtn = $('btnApplyMulti');
+        if (applyBtn) applyBtn.className = 'btn-apply-multi';
+
+        const cancelBtn = $('btnCancelMulti');
+        if (cancelBtn) cancelBtn.className = 'btn-cancel-multi';
+}
+
+function cancelSelection(){
+        clearMultiSelection();
+        renderCal();
 }
 
 function dayClick(ds){
@@ -221,32 +258,25 @@ function dayClick(ds){
         if (S.mode === 'range') {
             if (!CAL.rangeStart){
                 CAL.rangeStart = ds;
-                $('rangeHint').textContent = 'Clicca la fine del periodo';
                 S.sel.dates = [ds];
-                refreshHighlightRange();
+                $('rangeHint').textContent = 'Clicca la fine del periodo';
+                $('btnCancelMulti').className = 'btn-cancel-multi show';
             } else {
                 const start = CAL.rangeStart <= ds ? CAL.rangeStart: ds;
                 const end = CAL.rangeStart <= ds ? ds : CAL.rangeStart;
                 S.sel.dates = rangeDays(start, end);
+                CAL.rangeStart = null;
+
                 const n = S.sel.dates.length;
                 $('rangeHint').textContent = `${n} giorn${n === 1 ? 'o' : 'i'} selezionat${n === 1 ? 'o' : 'i'} - clicca Segna`;
+
                 const btn = $('btnApplyMulti');
                 btn.className = 'btn-apply-multi' + (n > 0 ? ' show' : '');
                 if (n > 0) btn.textContent = `Segna ${n} giorn${n === 1 ? 'o' : 'i'} ▶`;
-                CAL.rangeStart = null; renderCal(); return;
+
+                $('btnCancelMulti').className = 'btn-cancel-multi' + (n > 0 ? ' show' : '');
             }
             renderCal();
-        }
-}
-
-function refreshHighlightRange(){
-        document.querySelectorAll('.cal-day').forEach(el => {
-            el.classList.remove('range-start', 'range-end', 'range-mid', 'selected-multi');
-        });
-
-        if (CAL.rangeStart) {
-            const el = $('cd-'+CAL.rangeStart);
-            if (el) el.classList.add('range-start');
         }
 }
 
@@ -303,7 +333,7 @@ function setHalf(h){
 }
 
 function refreshQty(){
-    const isOffice = S.sel.type === 'office';c
+    const isOffice = S.sel.type === 'office';
 
     $('qtySec').style.display = isOffice ? 'none' : 'block';
     if (isOffice) return;
@@ -311,7 +341,8 @@ function refreshQty(){
     const cls = S.sel.type === 'permit' ? 'active-p' : 'active';
 
     ['whole', 'half', 'hours'].forEach(q => {
-        $('qb' + q).className = 'qty-btn' + (S.sel.qty === q.toLowerCase() ? ` ${cls}` : '');
+        const id = 'qb' + q.charAt(0).toUpperCase() + q.slice(1);
+        $(id).className = 'qty-btn' + (S.sel.qty === q.toLowerCase() ? ` ${cls}` : '');
     });
 
     $('halfRow').style.display = S.sel.qty === 'half' ? 'grid' : 'none';
@@ -347,11 +378,11 @@ async function saveDay(){
 
     try { await saveEvents(S.sel.dates, evObj); }
     catch(e) { 
-        alert('Errore eliminazione: ' + e.message); 
+        alert('Errore salvataggio: ' + e.message); 
         return; 
     } 
 
-    clearMultiSelection(); closeModal(); $('btnApplyMulti').className = 'btn-apply-multi';
+    closeModal(); clearMultiSelection(); renderCal();
 }
 
 async function delDay() {
@@ -365,11 +396,13 @@ async function delDay() {
         alert('Errore eliminazione: ' + e.message);
         return;
     }
+
+    closeModal(); clearMultiSelection(); renderCal();
 }
 
 Object.assign(window,{
     shiftMonth, dpChange, dpToday, toggleOptions, addExtra,
-    setSelMode, applyMulti, pick, setQty, setHalf, closeModal
+    setSelMode, applyMulti, cancelSelection, pick, setQty, setHalf, closeModal
 });
 
 guardPage('calendar', () => {
