@@ -11,13 +11,28 @@ const NAME = ['', 'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 
 
 function getSelectedMonth() { return [...document.querySelectorAll('.month-chip.active')].map( b => parseInt(b.dataset.m)); }
 
+function getSelectedYears() { return [...document.querySelectorAll('.year-chip.active')].map( b => parseInt(b.dataset.y)).sort((a,b) => a-b); }
+
+function toggleYear(btn) { btn.classList.toggle('active'); }
+
+function updateMonthsAllNoneVisibility(){
+    const total = document.querySelectorAll('.month-chip').length;
+    const selected = getSelectedMonth().length;
+
+    const btnAll = $('btnMonthsAll');
+    const btnNone = $('btnMonthsNone');
+
+    if (btnAll) btnAll.style.display = selected === total ? 'none' : '';
+    if (btnNone) btnNone.style.display = selected === 0 ? 'none' : '';
+}
+
 function flattenEv(evObj) {
     return Object.entries(evObj).flatMap(([k, entries]) =>
         (Array.isArray(entries) ? entries : [entries]).map(ev => [k, ev])
     );
 }
 
-function toggleMonth(btn) { btn.classList.toggle('active'); }
+function toggleMonth(btn) { btn.classList.toggle('active'); updateMonthsAllNoneVisibility(); }
 
 function selAllMonths(tutti) { document.querySelectorAll('.month-chip').forEach( b => {
      if(tutti){
@@ -26,13 +41,16 @@ function selAllMonths(tutti) { document.querySelectorAll('.month-chip').forEach(
         b.classList.remove('active');
     }
 });
+    updateMonthsAllNoneVisibility();
 }
 
 function initReport() {
     const yr = S.cfg.year;
     const allY = [ ...new Set([yr-2, yr-1, yr, yr+1, ...Object.keys(S.ev).map( y => parseInt(y.slice(0, 4)))])].sort((a,b) => b-a);
 
-    $('rYears').innerHTML = allY.map( y => `<option value="${y}" ${y===yr?'selected':''}>${y}</option>`).join('');
+    $('yearGrid').innerHTML = allY.map( y => `<button class="year-chip${y===yr?' active':''}" data-y="${y}" onclick="toggleYear(this)">${y}</button>`).join('');
+
+    updateMonthsAllNoneVisibility();
 }
 
 function fmtDay(ds, ev) {
@@ -49,17 +67,7 @@ function fmtDay(ds, ev) {
     return `${d}/${m} ${note}`;
 }
 
-function buildReport() {
-    const yr = parseInt($('rYears').value);
-    const months = getSelectedMonth();
-
-    if (months.length === 0) {
-        $('reportOut').innerHTML = ` <div class="empty-msg">
-            <span>📅</span> Seleziona almeno un mese
-        </div>`;
-        return;
-    }
-
+function buildYearBlock(yr, months, showYearHeading) {
     const evYear = flattenEv(S.ev).filter(([k]) => k.startsWith(String(yr) + '-')).sort(([a], [b]) => a.localeCompare(b));
 
     let totLGG = 0, totLH = 0, totPGG= 0, totPH = 0, totO= 0;
@@ -123,37 +131,69 @@ function buildReport() {
         </div>
     </div>`
 
-    $('reportOut').innerHTML = total + blocks.join('');
+    const heading = showYearHeading ? `<div class="rpt-year-heading">Anno ${yr}</div>` : '';
+
+    return `${heading}${total}${blocks.join('')}`;
 }
 
-function doCSV(){
-    const yr = parseInt($('rYears').value);
+function buildReport() {
+    const years = getSelectedYears();
     const months = getSelectedMonth();
-    const evL = flattenEv(S.ev).filter(([k]) => {
-        if(!k.startsWith(String(yr) + '-')) return false; return months.includes(parseInt(k.slice(5,7)));
-    }).sort(([a],[b]) => a.localeCompare(b));
 
-    let csv = 'Mese,Data,Tipo,Durata,Dettaglio,Ore\n';
+    if (years.length === 0) {
+        $('reportOut').innerHTML = ` <div class="empty-msg">
+            <span>📅</span> Seleziona almeno un anno
+        </div>`;
+        return;
+    }
 
-    evL.forEach(([k,ev]) => {
-        const [y,m,d] = k.split('-');
-        const month = NAME[parseInt(m)];
-        const dur = ev.type === 'office' ? 'whole' : ev.qty || 'whole';
-        const det = ev.qty === 'half' ? ev.half : (ev.qty === 'hours' ? `${ev.hours}h` : '');
-        csv += `${month},${d}/${m}/${y},${ev.type},${dur},${det},${eventHours(ev)}\n`;
+    if (months.length === 0) {
+        $('reportOut').innerHTML = ` <div class="empty-msg">
+            <span>📅</span> Seleziona almeno un mese
+        </div>`;
+        return;
+    }
+
+    $('reportOut').innerHTML = years.map(yr => buildYearBlock(yr, months, years.length > 1)).join('');
+}
+
+function doExcel(){
+    const years = getSelectedYears();
+    const months = getSelectedMonth();
+
+    if (years.length === 0 || months.length === 0) return;
+
+    const wb = XLSX.utils.book_new();
+
+    years.forEach(yr => {
+        const evL = flattenEv(S.ev).filter(([k]) => {
+            if(!k.startsWith(String(yr) + '-')) return false; return months.includes(parseInt(k.slice(5,7)));
+        }).sort(([a],[b]) => a.localeCompare(b));
+
+        const rows = [['Mese','Data','Tipo','Durata','Dettaglio','Ore']];
+
+        evL.forEach(([k,ev]) => {
+            const [y,m,d] = k.split('-');
+            const month = NAME[parseInt(m)];
+            const dur = ev.type === 'office' ? 'whole' : ev.qty || 'whole';
+            const det = ev.qty === 'half' ? ev.half : (ev.qty === 'hours' ? `${ev.hours}h` : '');
+            rows.push([month, `${d}/${m}/${y}`, ev.type, dur, det, eventHours(ev)]);
+        });
+
+        const ws = XLSX.utils.aoa_to_sheet(rows);
+        XLSX.utils.book_append_sheet(wb, ws, String(yr));
     });
 
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'}));
-    a.download = `leave_${yr}_report.csv`;
-    a.click();
+    const label = years.length > 1 ? `${years[0]}-${years[years.length - 1]}` : String(years[0]);
+    XLSX.writeFile(wb, `leave_${label}_report.xlsx`);
 }
 
 Object.assign(window, {
     toggleMonth,
+    toggleYear,
     selAllMonths,
     buildReport,
-    doCSV
+    doExcel
 });
 
 guardPage('report', () => { initReport(); });

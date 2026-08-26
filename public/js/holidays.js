@@ -167,4 +167,22 @@ export function rangeDays(start, end) {
 }
 
 export const COUNTRY_FLAG = { IT:'🇮🇹',DE:'🇩🇪',FR:'🇫🇷',ES:'🇪🇸',UK:'🇬🇧',US:'🇺🇸',CH:'🇨🇭',NL:'🇳🇱',BE:'🇧🇪',PT:'🇵🇹' };
-export const COUNTRY_NAME = { IT:'Italia',DE:'Germania',FR:'Francia',ES:'Spagna',UK:'UK',US:'USA',CH:'Svizzera',NL:'Paesi Bassi',BE:'Belgio',PT:'Portogallo' };
+
+export const COUNTRY_NAMES = {
+    IT: { it:'Italia', en:'Italy', de:'Italien', fr:'Italie', es:'Italia', nl:'Italië', pt:'Itália' },
+    DE: { it:'Germania', en:'Germany', de:'Deutschland', fr:'Allemagne', es:'Alemania', nl:'Duitsland', pt:'Alemanha' },
+    FR: { it:'Francia', en:'France', de:'Frankreich', fr:'France', es:'Francia', nl:'Frankrijk', pt:'França' },
+    ES: { it:'Spagna', en:'Spain', de:'Spanien', fr:'Espagne', es:'España', nl:'Spanje', pt:'Espanha' },
+    UK: { it:'Regno Unito', en:'United Kingdom', de:'Vereinigtes Königreich', fr:'Royaume-Uni', es:'Reino Unido', nl:'Verenigd Koninkrijk', pt:'Reino Unido' },
+    US: { it:'Stati Uniti', en:'United States', de:'Vereinigte Staaten', fr:'États-Unis', es:'Estados Unidos', nl:'Verenigde Staten', pt:'Estados Unidos' },
+    CH: { it:'Svizzera', en:'Switzerland', de:'Schweiz', fr:'Suisse', es:'Suiza', nl:'Zwitserland', pt:'Suíça' },
+    NL: { it:'Paesi Bassi', en:'Netherlands', de:'Niederlande', fr:'Pays-Bas', es:'Países Bajos', nl:'Nederland', pt:'Países Baixos' },
+    BE: { it:'Belgio', en:'Belgium', de:'Belgien', fr:'Belgique', es:'Bélgica', nl:'België', pt:'Bélgica' },
+    PT: { it:'Portogallo', en:'Portugal', de:'Portugal', fr:'Portugal', es:'Portugal', nl:'Portugal', pt:'Portugal' }
+};
+
+export function countryName(cc, lang){
+    const e = COUNTRY_NAMES[cc];
+    if (!e) return cc;
+    return e[lang] || e.it || cc;
+}

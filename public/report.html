@@ -7,13 +7,14 @@
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/report.css">
+        <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
     </head>
     <body>
         <div class="shell">
             <div class="report-controls">
                 <div class="fg">
                     <label>Anno</label>
-                    <select id="rYears"></select>
+                    <div class="year-grid" id="yearGrid"></div>
                 </div>
 
                 <div class="fg" style="flex: 1; min-width: 260px;">
@@ -33,15 +34,15 @@
                     </div>
 
                     <div style="display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap;">
-                        <button class="btn-months-all" onclick="selAllMonths(true)" data-i18n="rpt_all">Tutti</button>
-                        <button class="btn-months-all" onclick="selAllMonths(false)" data-i18n="rpt_none">Nessuno</button> 
+                        <button class="btn-months-all" id="btnMonthsAll" onclick="selAllMonths(true)" data-i18n="rpt_all">Tutti</button>
+                        <button class="btn-months-all" id="btnMonthsNone" onclick="selAllMonths(false)" data-i18n="rpt_none">Nessuno</button> 
                     </div>
                 </div>
                 <div style="display: flex; gap: 8px; align-items: flex-end;flex-wrap: wrap;">
                     <button class="btn-run" onclick="buildReport()">
                         <span data-i18n="rpt_generate">&#9654; Genera</span>
                     </button>
-                    <button class="btn-run btn-csv" onclick="doCSV()">&#11015; CSV</button>
+                    <button class="btn-run btn-csv" onclick="doExcel()">&#11015; Excel</button>
                 </div>
             </div>
 

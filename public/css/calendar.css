@@ -441,6 +441,58 @@
     font-size: .9rem
 }
 
+.extra-country-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px
+}
+
+.extra-country-row select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 6px 8px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: .76rem;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer
+}
+
+.extra-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px
+}
+
+.extra-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 5px 8px;
+    font-size: .76rem;
+    font-weight: 600;
+    color: var(--text)
+}
+
+.extra-chip-x {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: .9rem;
+    line-height: 1;
+    padding: 0
+}
+
+.extra-chip-x:hover {
+    color: var(--danger)
+}
+
 /* Pill hint range */
 .range-hint {
     font-size: .76rem;

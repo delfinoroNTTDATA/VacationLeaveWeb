@@ -7,11 +7,12 @@ import {
     rangeDays,
     currentCountry,
     COUNTRY_FLAG,
-    COUNTRY_NAME,
+    countryName,
     isWeekend
 } from "./holidays.js";
 import { saveEvents, deleteEvents, saveDayEntries } from "./data.js";
 import { calcStats } from "./calc.js";
+import { currentLang } from "./i18n.js";
 import { guardPage } from "./app-shell.js";
 
 const $ = id => document.getElementById(id);
@@ -143,7 +144,7 @@ function renderCal() {
         }
 
         extraHolidayFor(ds).forEach((d) => {
-            tag += `<div class="dtag dtag-extra" title="${COUNTRY_NAME[d.country]}: ${d.name}">
+            tag += `<div class="dtag dtag-extra" title="${countryName(d.country, currentLang())}: ${d.name}">
                     ${COUNTRY_FLAG[d.country]} ${d.name}</div>`
         })
 
@@ -178,12 +179,23 @@ function renderExtraChips(){
         if (!wrap) return;
 
         wrap.innerHTML = (CAL.extraCountries || []).map(cc=>
-            `<span class="extra-chip">${COUNTRY_FLAG[cc]} ${COUNTRY_NAME[cc]}
+            `<span class="extra-chip">${COUNTRY_FLAG[cc]} ${countryName(cc, currentLang())}
                 <button data-cc="${cc}" class="extra-chip-x">×</button></span>`
         ).join('');
         wrap.querySelectorAll('.extra-chip-x').forEach(b=> {
             b.onclick= () => removeExtra(b.dataset.cc);
         });
+
+        const sel = $('extraCountry');
+        if (sel) {
+            const cur = currentCountry();
+            const lang = currentLang();
+            sel.innerHTML = `<option value="">+ Aggiungi festività di un altro paese</option>` +
+                Object.keys(COUNTRY_FLAG)
+                    .filter(cc => cc !== cur && !(CAL.extraCountries || []).includes(cc))
+                    .map(cc => `<option value="${cc}">${COUNTRY_FLAG[cc]} ${countryName(cc, lang)}</option>`)
+                    .join('');
+        }
 }
 
 function addExtra(cc){
@@ -450,6 +462,11 @@ guardPage('calendar', () => {
     renderExtraChips();
     renderCal();
 })
+
+document.addEventListener('localechange', () => {
+    renderExtraChips();
+    renderCal();
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     $('btnSave').onclick = saveDay;
