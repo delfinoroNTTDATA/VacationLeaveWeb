@@ -135,7 +135,7 @@ function renderCal() {
                 }
             }
 
-            tag += `<div class="dtag dtag-${ev.type}" > ${icon} ${lbl}${qNote}</div>`
+            tag += `<div class="dtag dtag-${ev.type}" data-i18n="calendar_add_${ev.type}"> ${icon} ${lbl} <span data-i18n="m_${ev.type === 'office' ? '' : ev.half}_short">${qNote}</span></div>`
         });
 
         if (isHoliday){

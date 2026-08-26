@@ -99,7 +99,7 @@ function renderDah(){
                 }
                 return `<div class="recent-row">
                     <span style="font-size:1.2rem">${ico}</span>
-                    <span style="flex:1; font-weight:500">${dd}/${m}/${y}<span style="font-size:.74rem; color:var(--muted)">${qNote}</span></span>
+                    <span style="flex:1; font-weight:500">${dd}/${m}/${y}<span style="font-size:.74rem; color:var(--muted) data-i18n="${ev.type === 'office' ? '': 'm_'+ev.half}" >${qNote}</span></span>
                     <span class="badge badge-${ev.type}">${lbl}</span>
                 </div>`
             }).join('');

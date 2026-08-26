@@ -16,14 +16,15 @@ export const I18N = {
         rpt_no_event:'Nessun evento', rpt_select_month:'Seleziona almeno un mese.',
         t_leave:'Ferie', t_permit:'Permesso', t_office:'Sede', t_holiday:'Festivo',
         m_mark_day:'Segna giornata', m_type:'Tipo', m_duration:'Durata', m_full:'Intera', m_half:'Mezza', m_hours:'Ore',
-        m_morning:'Mattina', m_afternoon:'Pomeriggio', m_save:'Salva', m_delete:'Rimuovi', m_cancel:'Annulla',
+        m_morning:' — ½ Mattina', m_afternoon:' — ½ Pomeriggio', m_save:'Salva', m_delete:'Rimuovi', m_cancel:'Annulla',
         login_sub:'Accedi per sincronizzare sito e app', login_email:'Email', login_pass:'Password',
         login_signin:'Accedi', login_or:'— oppure —', login_register:'Crea account',
         set_annual:'Configurazione annuale', set_leave_tot:'Giorni ferie totali', set_perm_ore:'Ore permesso / ROL totali',
         set_day_hours:'Ore lavorative per giornata', set_year:'Anno di riferimento', set_country:'Paese festività',
         months:['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],
         months_short:['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'],
-        weekdays:['Lun','Mar','Mer','Gio','Ven','Sab','Dom'], syncBadge: '🔄 Sincronizzato', name: 'Ferie & Permesso'
+        weekdays:['Lun','Mar','Mer','Gio','Ven','Sab','Dom'], syncBadge: '🔄 Sincronizzato', name: 'Ferie & Permesso', m_morning_short: '— ½ M' , 
+        m_afternoon_short: '— ½ P', calendar_add_leave: '🌴 Ferie', calendar_add_permit: '⏰ Permesso', calendar_add_office: '🏢 Ufficio'
     },
     en: {
         nav_dashboard:'Dashboard', nav_calendar:'Calendar', nav_report:'Report', nav_settings:'Settings',
@@ -37,14 +38,15 @@ export const I18N = {
         rpt_no_event:'No events', rpt_select_month:'Select at least one month.',
         t_leave:'Leave', t_permit:'Permit', t_office:'Office', t_holiday:'Holiday',
         m_mark_day:'Mark day', m_type:'Type', m_duration:'Duration', m_full:'Full', m_half:'Half', m_hours:'Hours',
-        m_morning:'Morning', m_afternoon:'Afternoon', m_save:'Save', m_delete:'Remove', m_cancel:'Cancel',
+        m_morning:' — ½ Morning', m_afternoon:' — ½ Afternoon', m_save:'Save', m_delete:'Remove', m_cancel:'Cancel',
         login_sub:'Sign in to sync website and app', login_email:'Email', login_pass:'Password',
         login_signin:'Sign in', login_or:'— or —', login_register:'Create account',
         set_annual:'Annual configuration', set_leave_tot:'Total leave days', set_perm_ore:'Total permit / ROL hours',
         set_day_hours:'Working hours per day', set_year:'Reference year', set_country:'Holidays country',
         months:['January','February','March','April','May','June','July','August','September','October','November','December'],
         months_short:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-        weekdays:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], syncBadge: '🔄 Synchronised', name: 'Leave & Permit'
+        weekdays:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], syncBadge: '🔄 Synchronised', name: 'Leave & Permit',m_morning_short: '— ½ M' , 
+        m_afternoon_short: '— ½ A', calendar_add_leave: '🌴 Vacation', calendar_add_permit: '⏰ Leave', calendar_add_office: '🏢 Office'
     },
     de: {
         nav_dashboard:'Dashboard', nav_calendar:'Kalender', nav_report:'Bericht', nav_settings:'Einstellungen',
@@ -58,14 +60,15 @@ export const I18N = {
         rpt_no_event:'Keine Ereignisse', rpt_select_month:'Wählen Sie mindestens einen Monat aus.',
         t_leave:'Urlaub', t_permit:'Erlaubnis', t_office:'Büro', t_holiday:'Feiertag',
         m_mark_day:'Tag markieren', m_type:'Typ', m_duration:'Dauer', m_full:'Ganz', m_half:'Halb', m_hours:'Stunden',
-        m_morning:'Morgen', m_afternoon:'Nachmittag', m_save:'Speichern', m_delete:'Entfernen', m_cancel:'Abbrechen',
+        m_morning:' — ½ Morgen', m_afternoon:' — ½ Nachmittag', m_save:'Speichern', m_delete:'Entfernen', m_cancel:'Abbrechen',
         login_sub:'Anmelden, um Website und App zu synchronisieren', login_email:'E-Mail', login_pass:'Passwort',
         login_signin:'Anmelden', login_or:'— oder —', login_register:'Konto erstellen',
         set_annual:'Jährliche Konfiguration', set_leave_tot:'Urlaubstage gesamt', set_perm_ore:'Erlaubnis-/ROL-Stunden gesamt',
         set_day_hours:'Arbeitsstunden pro Tag', set_year:'Bezugsjahr', set_country:'Land der Feiertage',
         months:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
         months_short:['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'],
-        weekdays:['Mo','Di','Mi','Do','Fr','Sa','So'], syncBadge: '🔄 Synchronisiert', name: 'Urlaub & Erlaubnis'
+        weekdays:['Mo','Di','Mi','Do','Fr','Sa','So'], syncBadge: '🔄 Synchronisiert', name: 'Urlaub & Erlaubnis', m_morning_short: '— ½ M' , 
+        m_afternoon_short: '— ½ N', calendar_add_leave: '🌴 Urlaub', calendar_add_permit: '⏰ Freistellung', calendar_add_office: '🏢 Büro'
     },
     fr: {
         nav_dashboard:'Tableau de bord', nav_calendar:'Calendrier', nav_report:'Rapport', nav_settings:'Paramètres',
@@ -79,14 +82,15 @@ export const I18N = {
         rpt_no_event:'Aucun événement', rpt_select_month:'Sélectionnez au moins un mois.',
         t_leave:'Congé', t_permit:'Permission', t_office:'Bureau', t_holiday:'Jour férié',
         m_mark_day:'Marquer la journée', m_type:'Type', m_duration:'Durée', m_full:'Complète', m_half:'Demi', m_hours:'Heures',
-        m_morning:'Matin', m_afternoon:'Après-midi', m_save:'Enregistrer', m_delete:'Supprimer', m_cancel:'Annuler',
+        m_morning:' — ½ Matin', m_afternoon:' — ½ Après-midi', m_save:'Enregistrer', m_delete:'Supprimer', m_cancel:'Annuler',
         login_sub:"Connectez-vous pour synchroniser le site et l'application", login_email:'E-mail', login_pass:'Mot de passe',
         login_signin:'Se connecter', login_or:'— ou —', login_register:'Créer un compte',
         set_annual:'Configuration annuelle', set_leave_tot:'Jours de congé totaux', set_perm_ore:'Heures de permission / ROL totales',
         set_day_hours:'Heures de travail par jour', set_year:'Année de référence', set_country:'Pays des jours fériés',
         months:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
         months_short:['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'],
-        weekdays:['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'], syncBadge: '🔄 Synchronisé', name: 'Congés & Permission'
+        weekdays:['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'], syncBadge: '🔄 Synchronisé', name: 'Congés & Permission', m_morning_short: '— ½ M' , 
+        m_afternoon_short: '— ½ A', calendar_add_leave: '🌴 Congés', calendar_add_permit: '⏰ Absence', calendar_add_office: '🏢 Bureau'
     },
     es: {
         nav_dashboard:'Panel', nav_calendar:'Calendario', nav_report:'Informe', nav_settings:'Configuración',
@@ -100,14 +104,15 @@ export const I18N = {
         rpt_no_event:'Sin eventos', rpt_select_month:'Selecciona al menos un mes.',
         t_leave:'Vacaciones', t_permit:'Permiso', t_office:'Oficina', t_holiday:'Festivo',
         m_mark_day:'Marcar día', m_type:'Tipo', m_duration:'Duración', m_full:'Completo', m_half:'Medio', m_hours:'Horas',
-        m_morning:'Mañana', m_afternoon:'Tarde', m_save:'Guardar', m_delete:'Eliminar', m_cancel:'Cancelar',
+        m_morning:' — ½ Mañana', m_afternoon:' — ½ Tarde', m_save:'Guardar', m_delete:'Eliminar', m_cancel:'Cancelar',
         login_sub:'Inicia sesión para sincronizar el sitio y la app', login_email:'Correo electrónico', login_pass:'Contraseña',
         login_signin:'Iniciar sesión', login_or:'— o —', login_register:'Crear cuenta',
         set_annual:'Configuración anual', set_leave_tot:'Días de vacaciones totales', set_perm_ore:'Horas de permiso / ROL totales',
         set_day_hours:'Horas laborales por día', set_year:'Año de referencia', set_country:'País de festivos',
         months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
         months_short:['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
-        weekdays:['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'], syncBadge: '🔄 Sincronizado', name: 'Vacaciones y Permiso'
+        weekdays:['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'], syncBadge: '🔄 Sincronizado', name: 'Vacaciones y Permiso', m_morning_short: '— ½ M' , 
+        m_afternoon_short: '— ½ T', calendar_add_leave: '🌴 Vacaciones', calendar_add_permit: '⏰ Permiso', calendar_add_office: '🏢 Oficina'
     },
     nl: {
         nav_dashboard:'Dashboard', nav_calendar:'Kalender', nav_report:'Rapport', nav_settings:'Instellingen',
@@ -121,14 +126,15 @@ export const I18N = {
         rpt_no_event:'Geen gebeurtenissen', rpt_select_month:'Selecteer ten minste één maand.',
         t_leave:'Verlof', t_permit:'Permit', t_office:'Kantoor', t_holiday:'Feestdag',
         m_mark_day:'Dag markeren', m_type:'Type', m_duration:'Duur', m_full:'Volledig', m_half:'Half', m_hours:'Uren',
-        m_morning:'Ochtend', m_afternoon:'Middag', m_save:'Opslaan', m_delete:'Verwijderen', m_cancel:'Annuleren',
+        m_morning:' — ½ Ochtend', m_afternoon:' — ½ Middag', m_save:'Opslaan', m_delete:'Verwijderen', m_cancel:'Annuleren',
         login_sub:'Log in om site en app te synchroniseren', login_email:'E-mail', login_pass:'Wachtwoord',
         login_signin:'Inloggen', login_or:'— of —', login_register:'Account aanmaken',
         set_annual:'Jaarlijkse configuratie', set_leave_tot:'Totaal aantal verlofdagen', set_perm_ore:'Totaal permit-/ROL-uren',
         set_day_hours:'Werkuren per dag', set_year:'Referentiejaar', set_country:'Land feestdagen',
         months:['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'],
         months_short:['Jan','Feb','Mrt','Apr','Mei','Jun','Jul','Aug','Sep','Okt','Nov','Dec'],
-        weekdays:['Ma','Di','Wo','Do','Vr','Za','Zo'], syncBadge: '🔄 Gesynchroniseerd', name: 'Verlof & Permit'
+        weekdays:['Ma','Di','Wo','Do','Vr','Za','Zo'], syncBadge: '🔄 Gesynchroniseerd', name: 'Verlof & Permit',m_morning_short: '— ½ O' , 
+        m_afternoon_short: '— ½ M', calendar_add_leave: '🌴 Vakantie', calendar_add_permit: '⏰ Verlof', calendar_add_office: '🏢 Kantoor'
     },
     pt: {
         nav_dashboard:'Painel', nav_calendar:'Calendário', nav_report:'Relatório', nav_settings:'Definições',
@@ -142,14 +148,15 @@ export const I18N = {
         rpt_no_event:'Sem eventos', rpt_select_month:'Selecione pelo menos um mês.',
         t_leave:'Férias', t_permit:'Licença', t_office:'Escritório', t_holiday:'Feriado',
         m_mark_day:'Marcar dia', m_type:'Tipo', m_duration:'Duração', m_full:'Inteiro', m_half:'Meio', m_hours:'Horas',
-        m_morning:'Manhã', m_afternoon:'Tarde', m_save:'Guardar', m_delete:'Remover', m_cancel:'Cancelar',
+        m_morning:' — ½ Manhã', m_afternoon:' — ½ Tarde', m_save:'Guardar', m_delete:'Remover', m_cancel:'Cancelar',
         login_sub:'Inicie sessão para sincronizar o site e a app', login_email:'E-mail', login_pass:'Palavra-passe',
         login_signin:'Iniciar sessão', login_or:'— ou —', login_register:'Criar conta',
         set_annual:'Configuração anual', set_leave_tot:'Total de dias de férias', set_perm_ore:'Total de horas de licença / ROL',
         set_day_hours:'Horas de trabalho por dia', set_year:'Ano de referência', set_country:'País dos feriados',
         months:['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
         months_short:['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
-        weekdays:['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'], syncBadge: '🔄 Sincronizado', name: 'Férias & Licença'
+        weekdays:['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'], syncBadge: '🔄 Sincronizado', name: 'Férias & Licença', m_morning_short: '— ½ M' , 
+        m_afternoon_short: '— ½ T', calendar_add_leave: '🌴 Férias', calendar_add_permit:'⏰ Licença',calendar_add_office:'🏢 Escritório'
     }
 };
 
