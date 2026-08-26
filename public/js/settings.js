@@ -8,6 +8,7 @@ import { saveConfig, saveAmountCarriedOver, removeAmountCarriedOver } from "./da
 import { evRef, db } from "./firebase-config.js";
 import { getDocs, writeBatch } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 import { guardPage } from "./app-shell.js";
+import { t } from "./i18n.js";
 
 const $ = id => document.getElementById(id);
 
@@ -24,7 +25,7 @@ function renderSettings(){
 
     if(tog) tog.checked = S.cfg.aCOEnabled;
 
-    if($('toggleAmountCarriedOverLabel')) $('toggleAmountCarriedOverLabel').textContent = S.cfg.aCOEnabled ? 'Abilitato' : 'Disabilitato';
+    if($('toggleAmountCarriedOverLabel')) $('toggleAmountCarriedOverLabel').textContent = S.cfg.aCOEnabled ? t('set_enabled') : t('set_disabled');
 
     if($('amountCarriedOverCfg')) $('amountCarriedOverCfg').className = 'amountCarriedOver-cfg' + (S.cfg.aCOEnabled ? ' show' : '');
 
@@ -54,7 +55,7 @@ function adjR(k, d){
 function onToggleAmountCarriedOver(checked){
     S.cfg.aCOEnabled = checked;
 
-    $('toggleAmountCarriedOverLabel').textContent = checked ? 'Abilitato' : 'Disabilitato';
+    $('toggleAmountCarriedOverLabel').textContent = checked ? t('set_enabled') : t('set_disabled');
 
     $('amountCarriedOverCfg').className = 'amountCarriedOver-cfg' + (checked ? ' show' : '');
 
@@ -94,7 +95,7 @@ async function saveAmountCarriedOverManual() {
         const btn = $('btnSaveAmountCarriedOver');
 
 
-    } catch(e) { alert('Errore: ' + e.message); }
+    } catch(e) { alert(t('set_error_prefix') + e.message); }
 }
 
 async function remuoveAmoubtCarriedOverManual(yr) {
@@ -102,7 +103,7 @@ async function remuoveAmoubtCarriedOverManual(yr) {
         await removeAmountCarriedOver(yr);
         renderTabAmountCarriedOverManual();
         $('yearsHistory').innerHTML = buildHistory();
-    }catch(e) { alert('Errore: ' + e.message); }  
+    }catch(e) { alert(t('set_error_prefix') + e.message); }  
 }
 
 function renderTabAmountCarriedOverManual(){
@@ -113,17 +114,17 @@ function renderTabAmountCarriedOverManual(){
     if(!tab) return;
 
     if(!entries.length) {
-        tab.innerHTML = `<p style="font-size:.82rem;color:var(--muted)"> Nessun riporto manuale salvato.</p>`;
+        tab.innerHTML = `<p style="font-size:.82rem;color:var(--muted)"> ${t('set_no_manual_carryover')}</p>`;
         return;
     }
 
     tab.innerHTML = `<table class="history-tab">
             <thead>
                 <tr>
-                    <th>Anno</th>
-                    <th>Ore ferie</th>
-                    <th>Equiv. giorni</th>
-                    <th>Ore permesso</th>
+                    <th>${t('rpt_year_label')}</th>
+                    <th>${t('set_leave_hours_word')}</th>
+                    <th>${t('set_col_leave_days_equiv')}</th>
+                    <th>${t('set_permit_hours_word')}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -137,7 +138,7 @@ function renderTabAmountCarriedOverManual(){
                     <td style="color:var(--muted);font-size:.8rem">${fmt2(v.leaveHours / S.cfg.dayHours)}gg</td>
                     <td class="ht-amountCarriedOver">${v.permitHours}h</td>
                     <td>
-                        <button data-yr="${y}" class="btn-rim-amountCarriedOver" style="background:#fee2e2;border:none;color:var(--danger);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:.78rem;font-weight:600">Rimuovi</button>
+                        <button data-yr="${y}" class="btn-rim-amountCarriedOver" style="background:#fee2e2;border:none;color:var(--danger);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:.78rem;font-weight:600">${t('m_delete')}</button>
                     </td>
                 </tr>`                    
              ).join('')}
@@ -153,7 +154,7 @@ function buildHistory(){
     const yR = Object.keys(S.amountCOManual || {}).map(k => parseInt(k));
     const all = [...new Set([...yE, ...yR])].sort();
 
-    if(!all.length) return `<p style="color:var(--muted);font-size:.85rem;padding:8px 0">Nessun anno con eventi o riporti.</p>`;
+    if(!all.length) return `<p style="color:var(--muted);font-size:.85rem;padding:8px 0">${t('set_no_years')}</p>`;
 
     let rows='';
 
@@ -177,11 +178,11 @@ function buildHistory(){
     return `<table class="history-table">
         <thead>
             <tr>
-                <th>Anno</th>
-                <th>Ferie usate</th>
-                <th>Residuo</th>
-                <th>Permesso usato</th>
-                <th>Residuo</th>
+                <th>${t('rpt_year_label')}</th>
+                <th>${t('set_col_leave_used')}</th>
+                <th>${t('set_col_residual')}</th>
+                <th>${t('set_col_permit_used')}</th>
+                <th>${t('set_col_residual')}</th>
             </tr>
         </thead>
         <tbody>${rows}</tbody>
@@ -189,7 +190,7 @@ function buildHistory(){
 }
 
 async function clearAll() {
-    if(!confirm('Cancellare tutti gli eventi? Azione irreversibile.')) return;
+    if(!confirm(t('set_confirm_clear'))) return;
 
     const snap = await getDocs(evRef());
     const batch = writeBatch(db);

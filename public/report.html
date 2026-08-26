@@ -13,25 +13,12 @@
         <div class="shell">
             <div class="report-controls">
                 <div class="fg">
-                    <label>Anno</label>
+                    <label data-i18n="rpt_year_label">Anno</label>
                     <div class="year-grid" id="yearGrid"></div>
                 </div>
 
                 <div class="fg" style="flex: 1; min-width: 260px;">
-                    <div class="month-grid" id="monthGrid">
-                        <button class="month-chip active" data-m="1" onclick="toggleMonth(this)">Gen</button>
-                        <button class="month-chip active" data-m="2" onclick="toggleMonth(this)">Feb</button>
-                        <button class="month-chip active" data-m="3" onclick="toggleMonth(this)">Mar</button>
-                        <button class="month-chip active" data-m="4" onclick="toggleMonth(this)">Apr</button>
-                        <button class="month-chip active" data-m="5" onclick="toggleMonth(this)">Mag</button>
-                        <button class="month-chip active" data-m="6" onclick="toggleMonth(this)">Giu</button>
-                        <button class="month-chip active" data-m="7" onclick="toggleMonth(this)">Lug</button>
-                        <button class="month-chip active" data-m="8" onclick="toggleMonth(this)">Ago</button>
-                        <button class="month-chip active" data-m="9" onclick="toggleMonth(this)">Set</button>
-                        <button class="month-chip active" data-m="10" onclick="toggleMonth(this)">Ott</button>
-                        <button class="month-chip active" data-m="11" onclick="toggleMonth(this)">Nov</button>
-                        <button class="month-chip active" data-m="12" onclick="toggleMonth(this)">Dic</button>
-                    </div>
+                    <div class="month-grid" id="monthGrid"></div>
 
                     <div style="display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap;">
                         <button class="btn-months-all" id="btnMonthsAll" onclick="selAllMonths(true)" data-i18n="rpt_all">Tutti</button>

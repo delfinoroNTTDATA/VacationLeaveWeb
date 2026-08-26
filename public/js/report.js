@@ -5,9 +5,9 @@
 import { S } from './state.js'
 import { eventHours, day, fmt2 } from './calc.js'
 import { guardPage } from './app-shell.js'
+import { t, tn, monthNames } from './i18n.js'
 
 const $ = id => document.getElementById(id);
-const NAME = ['', 'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
 
 function getSelectedMonth() { return [...document.querySelectorAll('.month-chip.active')].map( b => parseInt(b.dataset.m)); }
 
@@ -50,6 +50,15 @@ function initReport() {
 
     $('yearGrid').innerHTML = allY.map( y => `<button class="year-chip${y===yr?' active':''}" data-y="${y}" onclick="toggleYear(this)">${y}</button>`).join('');
 
+    const prevSelected = new Set(getSelectedMonth());
+    const names = monthNames();
+
+    $('monthGrid').innerHTML = names.map((name, i) => {
+        const m = i + 1;
+        const active = prevSelected.size ? prevSelected.has(m) : true;
+        return `<button class="month-chip${active ? ' active' : ''}" data-m="${m}" onclick="toggleMonth(this)">${name.slice(0,3)}</button>`;
+    }).join('');
+
     updateMonthsAllNoneVisibility();
 }
 
@@ -59,14 +68,13 @@ function fmtDay(ds, ev) {
 
     if(ev.type !== 'office') {
         if(ev.qty === 'half'){
-            note = ev.half === 'morning' ? '½ M' : '½ P';
+            note = t(ev.half === 'morning' ? 'm_morning_short' : 'm_afternoon_short');
         }else if (ev.qty === 'hours') {
             note = `${ev.hours}h`;
         }
     }
     return `${d}/${m} ${note}`;
 }
-
 function buildYearBlock(yr, months, showYearHeading) {
     const evYear = flattenEv(S.ev).filter(([k]) => k.startsWith(String(yr) + '-')).sort(([a], [b]) => a.localeCompare(b));
 
@@ -90,7 +98,7 @@ function buildYearBlock(yr, months, showYearHeading) {
         if(leave.length) badges += `<div class="rpt-badge rpt-badge-leave"> 🌴 ${lGG}gg (${oL}h)</div>`;
         if(permit.length) badges += `<div class="rpt-badge rpt-badge-permit"> ⏰ ${pGG}gg (${oP}h)</div>`;
         if(office.length) badges += `<div class="rpt-badge rpt-badge-office"> 🏢 ${office.length}gg</div>`;
-        if(!evM.length) badges = `<span style="font-size:.78rem;color:var(--muted)">Nessun evento</span>`;
+        if(!evM.length) badges = `<span style="font-size:.78rem;color:var(--muted)">${t('rpt_no_event')}</span>`;
 
         function typeRow(arr,ico,type) {
             if(!arr.length) return '';
@@ -100,7 +108,7 @@ function buildYearBlock(yr, months, showYearHeading) {
             return `<div class="rpt-type-row">
                 <div class="rpt-type-ico">${ico}</div>
                 <div class="rpt-type-content">
-                    <div class="rpt-type-label">${type === 'leave' ? "Ferie" : type === 'permit' ? 'Permesso' : 'Sede'}</div>
+                    <div class="rpt-type-label">${t(type === 'leave' ? 't_leave' : type === 'permit' ? 't_permit' : 't_office')}</div>
                     <div class="rpt-chips-wrap">${chips}</div>
                 </div>
             </div>`;
@@ -109,7 +117,7 @@ function buildYearBlock(yr, months, showYearHeading) {
         const rows = typeRow(leave, '🌴', 'leave') + typeRow(permit, '⏰', 'permit') + typeRow(office, '🏢', 'office');
         return `<div class="rpt-month-block">
             <div class="rpt-month-header">
-                <div class="rpt-month-name">${NAME[m]} ${yr}</div>
+                <div class="rpt-month-name">${monthNames()[m-1]} ${yr}</div>
                 <div class="rpt-month-badges">${badges}</div>
             </div>
             ${rows ? `<div class="rpt-days">${rows}</div>` : ''}
@@ -119,19 +127,19 @@ function buildYearBlock(yr, months, showYearHeading) {
     const total = `<div class="rpt-total">
         <div class="rpt-tot-item">
             <div class="rpt-tot-val" style="color:var(--leave)">${fmt2(totLGG)}gg</div>
-            <div class="rpt-tot-lbl"> Ferie totali (${fmt2(totLH)}h)</div>
+            <div class="rpt-tot-lbl"> ${t('rpt_leave_tot')} (${fmt2(totLH)}h)</div>
         </div>
         <div class="rpt-tot-item">
             <div class="rpt-tot-val" style="color:var(--permit)">${fmt2(totPGG)}gg</div>
-            <div class="rpt-tot-lbl"> Permessi totali (${fmt2(totPH)}h)</div>
+            <div class="rpt-tot-lbl"> ${t('rpt_perm_tot')} (${fmt2(totPH)}h)</div>
         </div>
         <div class="rpt-tot-item">
             <div class="rpt-tot-val" style="color:var(--office)">${totO}</div>
-            <div class="rpt-tot-lbl"> Giorni in Sede</div>
+            <div class="rpt-tot-lbl"> ${t('rpt_office')}</div>
         </div>
     </div>`
 
-    const heading = showYearHeading ? `<div class="rpt-year-heading">Anno ${yr}</div>` : '';
+    const heading = showYearHeading ? `<div class="rpt-year-heading">${tn('rpt_year_heading', {yr})}</div>` : '';
 
     return `${heading}${total}${blocks.join('')}`;
 }
@@ -142,14 +150,14 @@ function buildReport() {
 
     if (years.length === 0) {
         $('reportOut').innerHTML = ` <div class="empty-msg">
-            <span>📅</span> Seleziona almeno un anno
+            <span>📅</span> ${t('rpt_select_year')}
         </div>`;
         return;
     }
 
     if (months.length === 0) {
         $('reportOut').innerHTML = ` <div class="empty-msg">
-            <span>📅</span> Seleziona almeno un mese
+            <span>📅</span> ${t('rpt_select_month')}
         </div>`;
         return;
     }
@@ -170,14 +178,14 @@ function doExcel(){
             if(!k.startsWith(String(yr) + '-')) return false; return months.includes(parseInt(k.slice(5,7)));
         }).sort(([a],[b]) => a.localeCompare(b));
 
-        const rows = [['Mese','Data','Tipo','Durata','Dettaglio','Ore']];
+        const rows = [[t('rpt_col_month'), t('rpt_col_date'), t('m_type'), t('m_duration'), t('rpt_col_detail'), t('m_hours')]];
 
         evL.forEach(([k,ev]) => {
             const [y,m,d] = k.split('-');
-            const month = NAME[parseInt(m)];
-            const dur = ev.type === 'office' ? 'whole' : ev.qty || 'whole';
-            const det = ev.qty === 'half' ? ev.half : (ev.qty === 'hours' ? `${ev.hours}h` : '');
-            rows.push([month, `${d}/${m}/${y}`, ev.type, dur, det, eventHours(ev)]);
+            const month = monthNames()[parseInt(m)-1];
+            const dur = ev.type === 'office' ? t('m_full') : ev.qty === 'half' ? t('m_half') : ev.qty === 'hours' ? t('m_hours') : t('m_full');
+            const det = ev.qty === 'half' ? t(ev.half === 'morning' ? 'hb_morning' : 'hb_afternoon') : (ev.qty === 'hours' ? `${ev.hours}h` : '');
+            rows.push([month, `${d}/${m}/${y}`, t(ev.type === 'leave' ? 't_leave' : ev.type === 'permit' ? 't_permit' : 't_office'), dur, det, eventHours(ev)]);
         });
 
         const ws = XLSX.utils.aoa_to_sheet(rows);

@@ -13,40 +13,27 @@
         <div class="shell shell-calendar">
             <div class="cal-toolbar">
                     <div class="dp-wrap">
-                    <button class="cal-nav-btn" onclick="shiftMonth(-1)" title="Mese precedente">&#8249;</button>
-                    <select class="dp-sel dp-month" id="dpMonth" onchange="dpChange()">
-                        <option value="0">Gennaio</option>
-                        <option value="1">Febbraio</option>
-                        <option value="2">Marzo</option>
-                        <option value="3">Aprile</option>
-                        <option value="4">Maggio</option>
-                        <option value="5">Giugno</option>
-                        <option value="6">Luglio</option>
-                        <option value="7">Agosto</option>
-                        <option value="8">Settembre</option>
-                        <option value="9">Ottobre</option>
-                        <option value="10">Novembre</option>
-                        <option value="11">Dicembre</option>
-                    </select>
+                    <button class="cal-nav-btn" onclick="shiftMonth(-1)" title="Mese precedente" data-i18n-title="prev_month">&#8249;</button>
+                    <select class="dp-sel dp-month" id="dpMonth" onchange="dpChange()"></select>
                     <span class="dp-sep">/</span>
                     <select class="dp-sel dp-year" id="dpYear" onchange="dpChange()"></select>
-                    <button class="dp-today" onclick="dpToday()">Oggi</button>
-                    <button class="cal-nav-btn" onclick="shiftMonth(1)" title="Mese successivo">&#8250;</button>
+                    <button class="dp-today" onclick="dpToday()" data-i18n="today_btn">Oggi</button>
+                    <button class="cal-nav-btn" onclick="shiftMonth(1)" title="Mese successivo" data-i18n-title="next_month">&#8250;</button>
                 </div>
                 <div class="legend">
                     <div class="legend-item">
                         <div class="legend-dot" style="background:var(--leave);"></div>
-                        <span>Ferie</span>
+                        <span data-i18n="t_leave">Ferie</span>
                         <span class="legend-stat" id="legStatLeave"></span>
                     </div>
                     <div class="legend-item">
                         <div class="legend-dot" style="background: var(--permit);"></div>
-                        <span>Permesso</span>
+                        <span data-i18n="t_permit">Permesso</span>
                         <span class="legend-stat" id="legStatPermit"></span>
                     </div>
                     <div class="legend-item">
                         <div class="legend-dot" style="background: var(--office);"></div>
-                        <span>Sede</span>
+                        <span data-i18n="t_office">Sede</span>
                         <span class="legend-stat" id="legStatOffice"></span>
                     </div>
                 </div>
@@ -59,9 +46,9 @@
                 <button class="sel-mode-btn" id="btnModeRange" onclick="setSelMode('range')">
                     <span data-i18n="mode_range">&#8614; Intervallo</span>
                 </button>
-                <span class="range-hint" id="rangeHint">Seleziona il primo giorno</span>
-                <button class="btn-cancel-multi" id="btnCancelMulti" onclick="cancelSelection()">Annulla</button>
-                <button class="btn-apply-multi" id="btnApplyMulti" onclick="applyMulti()">Segna selezionati &#9658;</button>
+                <span class="range-hint" id="rangeHint" data-i18n="rng_click_start">Seleziona il primo giorno</span>
+                <button class="btn-cancel-multi" id="btnCancelMulti" onclick="cancelSelection()" data-i18n="m_cancel">Annulla</button>
+                <button class="btn-apply-multi" id="btnApplyMulti" onclick="applyMulti()" data-i18n="rng_mark_selected">Segna selezionati &#9658;</button>
             </div>
 
             <div class="cal-opts" style="margin-bottom:10px">
@@ -103,27 +90,27 @@
                 <div class="type-row">
                     <button class="type-opt" id="opt-leave" onclick="pick('leave')">
                         <span class="ico">&#127804;</span>
-                    Ferie</button>
+                    <span data-i18n="t_leave">Ferie</span></button>
                     <button class="type-opt" id="opt-permit" onclick="pick('permit')">
                         <span class="ico">&#9200;</span>
-                    Permesso</button>
+                    <span data-i18n="t_permit">Permesso</span></button>
                     <button class="type-opt" id="opt-office" onclick="pick('office')">
                         <span class="ico">&#127970;</span>
-                    In Sede</button>
+                    <span data-i18n="t_office">Sede</span></button>
                 </div>
                 <div class="qty-section" id="qtySec">
-                    <div class="qty-label">Durata</div>
+                    <div class="qty-label" data-i18n="m_duration">Durata</div>
                     <div class="qty-row">
-                        <button class="qty-btn active" id="qbWhole" onclick="setQty('whole')">&#9646; Intera</button>
-                        <button class="qty-btn" id="qbHalf" onclick="setQty('half')">&#9651; Mezza</button>
-                        <button class="qty-btn" id="qbHours" onclick="setQty('hours')">&#9711; Ore</button>
+                        <button class="qty-btn active" id="qbWhole" onclick="setQty('whole')">&#9646; <span data-i18n="m_full">Intera</span></button>
+                        <button class="qty-btn" id="qbHalf" onclick="setQty('half')">&#9651; <span data-i18n="m_half">Mezza</span></button>
+                        <button class="qty-btn" id="qbHours" onclick="setQty('hours')">&#9711; <span data-i18n="m_hours">Ore</span></button>
                     </div>
                     <div id="halfRow" class="half-row" style="display: none;">
-                        <button class="half-btn active" id="hbMorning" onclick="setHalf('morning')">&#9728; Mattina</button>
-                        <button class="half-btn" id="hbAfternoon" onclick="setHalf('afternoon')">&#9790; Pomeriggio</button>
+                        <button class="half-btn active" id="hbMorning" onclick="setHalf('morning')">&#9728; <span data-i18n="hb_morning">Mattina</span></button>
+                        <button class="half-btn" id="hbAfternoon" onclick="setHalf('afternoon')">&#9790; <span data-i18n="hb_afternoon">Pomeriggio</span></button>
                     </div>
                     <div id="hoursRow" class="hours-custom-row" style="display: none;">
-                        <label>Numero ore</label>
+                        <label data-i18n="hours_number_label">Numero ore</label>
                         <input type="number" class="hours-input" id="hoursInput" min="1" max="8" value="1">
                         <span style="font-size: .82rem;color: var(--muted);">/
                             <span id="hoursDayLabel">8</span>
@@ -132,9 +119,9 @@
                     <div class="hours-note" id="hoursNote"></div> 
                 </div>
                 <div class="modal-btns">
-                    <button class="btn btn-cancel" onclick="closeModal()">Anulla</button>
-                    <button class="btn btn-del" id="btnDel">Rimuovi</button>
-                    <button class="btn btn-save" id="btnSave">Salva</button>
+                    <button class="btn btn-cancel" onclick="closeModal()" data-i18n="m_cancel">Anulla</button>
+                    <button class="btn btn-del" id="btnDel" data-i18n="m_delete">Rimuovi</button>
+                    <button class="btn btn-save" id="btnSave" data-i18n="m_save">Salva</button>
                 </div>
             </div>
         </div>

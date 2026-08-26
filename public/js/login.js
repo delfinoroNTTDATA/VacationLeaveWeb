@@ -4,7 +4,7 @@ import {
     signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js'
 import { setDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js'
-import { applyI18n } from './i18n.js'
+import { applyI18n, t } from './i18n.js'
 
 onAuthStateChanged(auth, (user) => {
     if(user) window.location.href = 'dashboard.html';
@@ -33,7 +33,7 @@ async function doRegister() {
     $('authError').textContent = '';
 
     if(pass.length < 6) {
-        $('authError').textContent = 'Password minimo 6 caratteri';
+        $('authError').textContent = t('login_err_pass_length');
         return;
     }
 

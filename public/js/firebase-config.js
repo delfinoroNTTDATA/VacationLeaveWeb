@@ -5,6 +5,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getAuth } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import { getFirestore, doc, collection } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import { t } from './i18n.js';
 
 // ══════════════════════════════════════════════════════════
 // 🔧 CONFIGURE HERE YOUR FIREBASE CREDENTIALS
@@ -34,11 +35,11 @@ export const amountCORef = () => collection(db, 'users', session.uid, 'amountCar
 // ── Translation of error messages ──
 export function tradErr(code) {
   const m = {
-    'auth/user-not-found':       'Email non trovata. Crea un account.',
-    'auth/wrong-password':       'Password errata.',
-    'auth/invalid-email':        'Email non valida.',
-    'auth/email-already-in-use': 'Email già registrata. Fai login.',
-    'auth/invalid-credential':   'Credenziali non valide.',
+    'auth/user-not-found':       t('err_user_not_found'),
+    'auth/wrong-password':       t('err_wrong_password'),
+    'auth/invalid-email':        t('err_invalid_email'),
+    'auth/email-already-in-use': t('err_email_in_use'),
+    'auth/invalid-credential':   t('err_invalid_credential'),
   };
-  return m[code] || 'Errore: ' + code;
+  return m[code] || t('set_error_prefix') + code;
 }

@@ -1,7 +1,7 @@
 import { S } from './state.js';
 import { calcStats } from './calc.js';
 import { guardPage } from './app-shell.js';
-import { t } from './i18n.js'
+import { t, tn } from './i18n.js'
 
 function renderDah(){
     const yr = S.cfg.year, st = calcStats(yr), aCO = st.amountCarriedOver;
@@ -11,13 +11,13 @@ function renderDah(){
     if(banner){
         if(aCO.leaveDays > 0 || aCO.permitHours > 0){
             let parts = [];
-            if(aCO.leaveDays > 0) parts.push(`<strong>+${aCO.leaveDays}gg ferie</strong> (${aCO.leaveDays * S.cfg.dayHours}h)`);
-            if(aCO.permitHours > 0) parts.push(`<strong>+${aCO.permitHours}h permesso</strong>`);
-            const from = S.cfg.aCOEnabled ? `da ${yr-1} + riporto manuale` : 'riporto manuale';
+            if(aCO.leaveDays > 0) parts.push(`<strong>+${aCO.leaveDays}gg ${t('t_leave')}</strong> (${aCO.leaveDays * S.cfg.dayHours}h)`);
+            if(aCO.permitHours > 0) parts.push(`<strong>+${aCO.permitHours}h ${t('t_permit')}</strong>`);
+            const from = S.cfg.aCOEnabled ? tn('aco_from_year', {yr: yr-1}) : t('aco_manual');
             banner.innerHTML = `<div class="card-amountCarriedOver-banner">
                 <div class="crb-icon">&#128257;</div>
                 <div class="crb-text">
-                    <div class="crb-title">Residui riportati - ${from}</div>
+                    <div class="crb-title">${t('aco_banner_title')} - ${from}</div>
                     <div class="crb-detail">${parts.join(' e ')}${st.noteDeadline ? ' &mdash; '+st.noteDeadline : ''}</div>
                 </div>
             </div>`
@@ -27,7 +27,7 @@ function renderDah(){
             {   
                 lbl: t('leave_left'), 
                 val: st.leaveACO+'g',
-                sub: `= ${st.leaveCons} giorni`,
+                sub: tn('days_count_suffix', {n: st.leaveCons}),
                 amountCarriedOver: aCO.leaveDays > 0 ? `+${aCO.leaveDays}gg` : '',
                 pct: (st.leaveCons / st.leaveTotalYearly) * 100,
                 acc: 'var(--leave)'
@@ -36,7 +36,7 @@ function renderDah(){
             {
                 lbl: t('leave_hours_used'),
                 val: st.leaveHours + 'h',
-                sub: `= ${st.leaveCons} giorni`,
+                sub: tn('days_count_suffix', {n: st.leaveCons}),
                 amountCarriedOver: '',
                 pct: (st.leaveCons / st.leaveTotalYearly) * 100,
                 acc: 'var(--leave)'
@@ -60,7 +60,7 @@ function renderDah(){
             {
                 lbl: t('office_days'),
                 val: st.officeDays,
-                sub: `${t('nav_dashboard') ? '' : ''}${yr}`,
+                sub: `${yr}`,
                 amountCarriedOver: '',
                 pct: 0,
                 acc: 'var(--office)'
@@ -79,7 +79,7 @@ function renderDah(){
 
         if(!recent.length){ list.innerHTML = `<div class="empty-msg">
                 <span style="font-size:1.2rem">&#128269;</span>
-                Nessun evento. Apri il Calendario per aggiungerne.
+                ${t('no_events_dashboard')}
             </div>`;
             return;
         }
@@ -94,12 +94,12 @@ function renderDah(){
 
                 if(ev.type !== 'office'){
                     if(ev.qty === 'half'){
-                        qNote = ` — ½ ${ev.half === 'morning' ? 'Mattina' : 'Pomeriggio'}`;
+                        qNote = t(ev.half === 'morning' ? 'm_morning' : 'm_afternoon');
                     } else if (ev.qty === 'hours') qNote = ` - ${ev.hours}h`;
                 }
                 return `<div class="recent-row">
                     <span style="font-size:1.2rem">${ico}</span>
-                    <span style="flex:1; font-weight:500">${dd}/${m}/${y}<span style="font-size:.74rem; color:var(--muted) data-i18n="${ev.type === 'office' ? '': 'm_'+ev.half}" >${qNote}</span></span>
+                    <span style="flex:1; font-weight:500">${dd}/${m}/${y}<span style="font-size:.74rem; color:var(--muted)">${qNote}</span></span>
                     <span class="badge badge-${ev.type}">${lbl}</span>
                 </div>`
             }).join('');

@@ -12,7 +12,7 @@ import {
 } from "./holidays.js";
 import { saveEvents, deleteEvents, saveDayEntries } from "./data.js";
 import { calcStats } from "./calc.js";
-import { currentLang } from "./i18n.js";
+import { currentLang, t, tn, monthNames } from "./i18n.js";
 import { guardPage } from "./app-shell.js";
 
 const $ = id => document.getElementById(id);
@@ -20,6 +20,8 @@ const $ = id => document.getElementById(id);
 function dpSyncSelectors () {
     const mS = $('dpMonth'), yS = $( 'dpYear');
     if (!mS || !yS) return;
+
+    mS.innerHTML = monthNames().map((name, i) => `<option value="${i}">${name}</option>`).join('');
 
     const year = [];
 
@@ -58,10 +60,10 @@ function dpChange() {
 }
 
 function dpToday() {
-    const t = new Date();
+    const now = new Date();
 
-    S.vm.y = t.getFullYear();
-    S.vm.m = t.getMonth();
+    S.vm.y = now.getFullYear();
+    S.vm.m = now.getMonth();
 
     clearMultiSelection();
     dpSyncSelectors();
@@ -123,23 +125,21 @@ function renderCal() {
         let tag = '';
 
         entries.forEach(ev => {
-            const icon = ev.type === 'leave' ? '🌴' : ev.type === 'permit' ? '⏰':'🏢';
-            const lbl = ev.type === 'leave' ? 'Ferie' : ev.type === 'permit' ? 'Permesso' : 'Sede';
             let qNote= '';
 
             if (ev.type !== 'office') {
                 if (ev.qty === 'half') {
-                    qNote = ` ½${ev.half==='morning'? 'M' : 'P'}`;
+                    qNote = ` ${t(ev.half === 'morning' ? 'm_morning_short' : 'm_afternoon_short')}`;
                 } else if (ev.qty === 'hours') {
                     qNote = ` ${ev.hours}h`;
                 }
             }
 
-            tag += `<div class="dtag dtag-${ev.type}" data-i18n="calendar_add_${ev.type}"> ${icon} ${lbl} <span data-i18n="m_${ev.type === 'office' ? '' : ev.half}_short">${qNote}</span></div>`
+            tag += `<div class="dtag dtag-${ev.type}">${t('calendar_add_' + ev.type)}${qNote}</div>`
         });
 
         if (isHoliday){
-             const name = holidayName(ds) || 'Festivo';
+             const name = holidayName(ds) || t('t_holiday');
              tag += `<div class="dtag dtag-holiday" title="${name}">🎉 ${name}</div>`
         }
 
@@ -165,13 +165,13 @@ function updateLegendStats(){
     const st = calcStats(S.vm.y);
 
     const leaveEl = $('legStatLeave');
-    if (leaveEl) leaveEl.textContent = `${st.leaveCons}gg usate · ${st.leaveACO}gg residue`;
+    if (leaveEl) leaveEl.textContent = tn('leg_leave_stat', {u: st.leaveCons, l: st.leaveACO});
 
     const permitEl = $('legStatPermit');
-    if (permitEl) permitEl.textContent = `${st.permitHours}h usate · ${st.permitHourACO}h residue`;
+    if (permitEl) permitEl.textContent = tn('leg_permit_stat', {u: st.permitHours, l: st.permitHourACO});
 
     const officeEl = $('legStatOffice');
-    if (officeEl) officeEl.textContent = `${st.officeDays}gg`;
+    if (officeEl) officeEl.textContent = tn('leg_office_stat', {u: st.officeDays});
 }
 
 function renderExtraChips(){
@@ -190,7 +190,7 @@ function renderExtraChips(){
         if (sel) {
             const cur = currentCountry();
             const lang = currentLang();
-            sel.innerHTML = `<option value="">+ Aggiungi festività di un altro paese</option>` +
+            sel.innerHTML = `<option value="">${t('cal_add_country')}</option>` +
                 Object.keys(COUNTRY_FLAG)
                     .filter(cc => cc !== cur && !(CAL.extraCountries || []).includes(cc))
                     .map(cc => `<option value="${cc}">${COUNTRY_FLAG[cc]} ${countryName(cc, lang)}</option>`)
@@ -227,7 +227,7 @@ function toggleOptions(option){
         clearHolidayCache(); clearMultiSelection(); renderCal();
 }
 
-const RANGE_HINT_DEFAULT = 'Seleziona il primo giorno';
+const RANGE_HINT_DEFAULT_KEY = 'rng_click_start';
 
 function setSelMode (mode) {
         S.mode = mode; clearMultiSelection();
@@ -246,7 +246,7 @@ function clearMultiSelection(){
         CAL.rangeStart = null;
 
         const hint = $('rangeHint');
-        if (hint) hint.textContent = RANGE_HINT_DEFAULT;
+        if (hint) hint.textContent = t(RANGE_HINT_DEFAULT_KEY);
 
         const applyBtn = $('btnApplyMulti');
         if (applyBtn) applyBtn.className = 'btn-apply-multi';
@@ -271,7 +271,7 @@ function dayClick(ds){
             if (!CAL.rangeStart){
                 CAL.rangeStart = ds;
                 S.sel.dates = [ds];
-                $('rangeHint').textContent = 'Clicca la fine del periodo';
+                $('rangeHint').textContent = t('rng_click_end');
                 $('btnCancelMulti').className = 'btn-cancel-multi show';
             } else {
                 const start = CAL.rangeStart <= ds ? CAL.rangeStart: ds;
@@ -280,11 +280,11 @@ function dayClick(ds){
                 CAL.rangeStart = null;
 
                 const n = S.sel.dates.length;
-                $('rangeHint').textContent = `${n} giorn${n === 1 ? 'o' : 'i'} selezionat${n === 1 ? 'o' : 'i'} - clicca Segna`;
+                $('rangeHint').textContent = tn('rng_days_selected_hint', {n});
 
                 const btn = $('btnApplyMulti');
                 btn.className = 'btn-apply-multi' + (n > 0 ? ' show' : '');
-                if (n > 0) btn.textContent = `Segna ${n} giorn${n === 1 ? 'o' : 'i'} ▶`;
+                if (n > 0) btn.textContent = tn('rng_mark_btn', {n});
 
                 $('btnCancelMulti').className = 'btn-cancel-multi' + (n > 0 ? ' show' : '');
             }
@@ -296,8 +296,8 @@ function applyMulti(){
         if (S.sel.dates.length > 0) openModal(S.sel.dates);
 }
 
-function describeType(t){
-        return t === 'leave' ? 'Ferie' : t === 'permit' ? 'Permesso' : 'Sede';
+function describeType(type){
+        return t(type === 'leave' ? 't_leave' : type === 'permit' ? 't_permit' : 't_office');
 }
 
 function openModal(dates){
@@ -309,7 +309,7 @@ function openModal(dates){
             const morning = halfEntries.find(e => e.half === 'morning');
             const afternoon = halfEntries.find(e => e.half === 'afternoon');
 
-            existingInfo.textContent = `Mattina: ${describeType(morning.type)} · Pomeriggio: ${describeType(afternoon.type)}`;
+            existingInfo.textContent = tn('modal_half_summary', {a: describeType(morning.type), b: describeType(afternoon.type)});
             existingInfo.style.display = 'block';
 
             S.sel.type = morning.type; S.sel.qty = 'half';
@@ -319,7 +319,10 @@ function openModal(dates){
             const ev = halfEntries[0];
             const missingHalf = ev.half === 'morning' ? 'afternoon' : 'morning';
 
-            existingInfo.textContent = `Già segnato: ${ev.half === 'morning' ? 'Mattina' : 'Pomeriggio'} – ${describeType(ev.type)}. Scegli il tipo per l'altra metà.`;
+            existingInfo.textContent = tn('modal_half_existing', {
+                half: t(ev.half === 'morning' ? 'hb_morning' : 'hb_afternoon'),
+                type: describeType(ev.type)
+            });
             existingInfo.style.display = 'block';
 
             S.sel.type = null; S.sel.qty = 'half';
@@ -334,7 +337,7 @@ function openModal(dates){
             S.sel.half = firstEv?.half || 'morning'; S.sel.hours = firstEv?.hours || 1;
         }
 
-        $('mTitle').textContent = dates.length === 1 ? `Segna giornata` : `Segna ${dates.length} giorni`;
+        $('mTitle').textContent = dates.length === 1 ? t('m_mark_day') : tn('modal_mark_days', {n: dates.length});
 
         if (dates.length === 1) {
             const [y, m, d] = dates[0].split('-');
@@ -346,7 +349,7 @@ function openModal(dates){
                 return `${d}/${m}`;
             };
 
-            $('mSub').textContent = s.slice(0,5).map(f).join(', ') + (s.length > 5 ? ` + ${s.length - 5} altri` : '');
+            $('mSub').textContent = s.slice(0,5).map(f).join(', ') + (s.length > 5 ? tn('modal_plus_others', {n: s.length - 5}) : '');
         }
 
         $('hoursDayLabel').textContent = S.cfg.dayHours;
@@ -357,11 +360,11 @@ function openModal(dates){
 
 function closeModal(){ $('ovl').classList.remove('open'); }
 
-function pick(t){ S.sel.type = S.sel.type === t ? null : t; refreshOptions(); }
+function pick(type){ S.sel.type = S.sel.type === type ? null : type; refreshOptions(); }
 
 function refreshOptions(){ 
-    ['leave', 'permit', 'office'].forEach(t => {
-        $('opt-' + t).className = 'type-opt' + (S.sel.type === t ? ` sel-${t}` : '');
+    ['leave', 'permit', 'office'].forEach(type => {
+        $('opt-' + type).className = 'type-opt' + (S.sel.type === type ? ` sel-${type}` : '');
     });
 }
 
@@ -400,7 +403,7 @@ function refreshQty(){
     if (S.sel.qty === 'hours') {
         const h = parseInt($('hoursInput').value) || 1;
 
-        $('hoursNote').textContent = `Equivale a ${(h/S.cfg.dayHours).toFixed(2)} giorni`;
+        $('hoursNote').textContent = tn('hours_equiv', {n: (h/S.cfg.dayHours).toFixed(2)});
     }else {
         $('hoursNote').textContent = '';
     }
@@ -430,7 +433,7 @@ async function saveDay(){
         }
     }
     catch(e) { 
-        alert('Errore salvataggio: ' + e.message); 
+        alert(t('err_save') + e.message); 
         return; 
     } 
 
@@ -445,7 +448,7 @@ async function delDay() {
 
     try { await deleteEvents(S.sel.dates); }
     catch (e) {
-        alert('Errore eliminazione: ' + e.message);
+        alert(t('err_delete') + e.message);
         return;
     }
 
@@ -476,6 +479,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     $('hoursInput').addEventListener('input', () => {
         const h = parseInt($('hoursInput').value) || 0;
-        $('hoursNote').textContent = h > 0 ? `Equivale a ${(h/S.cfg.dayHours).toFixed(2)} giorni` : ''
+        $('hoursNote').textContent = h > 0 ? tn('hours_equiv', {n: (h/S.cfg.dayHours).toFixed(2)}) : ''
     });
 });
